@@ -434,7 +434,7 @@ noscript .source-status{margin:12px 0;padding:14px 16px;border:1px solid var(--l
 
 <div id="toasts"></div>
 <div id="printArea"></div>
-<audio id="au" preload="metadata"></audio>
+<audio id="au" preload="none" playsinline></audio>
 <noscript><div class="ns">📖 يتطلب هذا التطبيق تفعيل JavaScript.</div></noscript>
 
 <script>
@@ -791,8 +791,15 @@ function updateMediaSession() {
   } catch (_) {}
 }
 function startAudio(src) {
-  AU.src = src; AU.playbackRate = S.speed;
-  AU.play().catch(() => toast('اضغط زر التشغيل لبدء التلاوة ▶'));
+  // تشغيل مباشر من خادم القارئ؛ لا ننزّل الملف إلى ذاكرة التطبيق.
+  AU.pause();
+  AU.preload = 'none';
+  if (AU.src !== new URL(src, location.href).href) {
+    AU.src = src;
+    AU.load();
+  }
+  AU.playbackRate = S.speed;
+  AU.play().catch(() => toast('تعذّر بدء البث؛ اضغط تشغيل أو تحقق من اتصال الإنترنت ▶'));
   showPlayer(); markPlaying();
 }
 async function getAyahTimings(rec, s) {
@@ -829,18 +836,26 @@ async function getAyahTimings(rec, s) {
 async function playAyah(s, a, seq) {
   if (!DATA_READY) { toast('جارٍ تحميل نص ورش أولًا…'); const ok = await ensureFull(); if (ok) return playAyah(s,a,seq); toast('تعذّر تحميل نص ورش.'); return; }
   if (!SURA(s) || a < 1 || a > SURA(s).ayahs) return;
-  const rec = ayahRec();
-  if (!rec) { toast('لم نعثر على قارئ ورش لديه توقيتات آيات موثقة. يمكنك تشغيل السورة كاملة.'); return; }
-  const timings = await getAyahTimings(rec, s);
-  const clip = timings && timings.get(a);
-  if (!clip) { toast('لا تتوفر توقيتات متوافقة مع ترقيم ورش لهذه السورة لدى هذا القارئ.'); return; }
+  if (!MP3_REC) await ensureReciters();
+  // نفضّل القارئ الذي اختاره المستخدم، ثم نجرب بقية قراء ورش الذين لديهم توقيت آيات كامل.
+  const preferred = ayahRec();
+  const candidates = [preferred, ...(MP3_REC || []).filter(r => r.timingReadId && (!preferred || r.rid !== preferred.rid))].filter(Boolean);
+  if (!candidates.length) { toast('التلاوة آية بآية غير متاحة بعد لأي قارئ في المصدر الحالي؛ يمكنك تشغيل السورة مباشرة.'); return; }
+  let rec = null, clip = null;
+  for (const candidate of candidates) {
+    const timings = await getAyahTimings(candidate, s);
+    const found = timings && timings.get(a);
+    if (found) { rec = candidate; clip = found; break; }
+  }
+  if (!rec || !clip) { toast('لم نعثر على توقيت موثّق لهذه الآية لدى قراء ورش المتاحين. جرّب قارئًا آخر أو شغّل السورة كاملة.'); return; }
   P = { on:true, mode:'ayah', rec, s, a, seq:!!seq, clipStart:clip.start/1000, clipEnd:clip.end/1000, pendingStart:clip.start/1000, triedFallback:false };
   const src = rec.server + pad3(s) + '.mp3';
   AU.pause();
-  if (AU.src !== src) { AU.src = src; AU.load(); }
+  if (AU.src !== new URL(src, location.href).href) { AU.src = src; AU.load(); }
+  AU.preload = 'none';
   AU.playbackRate = S.speed;
   showPlayer(); markPlaying();
-  if (AU.readyState >= 1 && AU.src === src) {
+  if (AU.readyState >= 1 && AU.src === new URL(src, location.href).href) {
     AU.currentTime = P.clipStart;
     P.pendingStart = null;
     AU.play().catch(() => toast('اضغط زر التشغيل لبدء التلاوة ▶'));
@@ -1201,14 +1216,15 @@ function vAudio() {
   </div>
   <h2 class="sec">قرّاء السور الكاملة</h2>
   <div id="mp3Recs">${MP3_REC ? mp3Cards() : `<div class="card"><div class="skel" style="height:22px;margin-bottom:10px"></div><div class="skel" style="height:22px;width:55%"></div></div>`}</div>
-  <p class="muted" style="margin-top:16px;text-align:center">قائمة القراء والطريق: فهرس مستقل يصرّح بطريق الأزرق. توقيتات الآيات، عند توفرها، تُطابق قراءة ورش في MP3Quran.</p>`;
+  <p class="muted" style="margin-top:16px;text-align:center">كل الأسماء المعروضة من فهرس يصرّح بأنها رواية ورش عن نافع. قد يختلف الطريق، ويظهر كما يورده المصدر. تلاوة الآية تحتاج توقيتًا كاملًا متوافقًا؛ لذلك لا نُنشئ تقطيعًا تخمينيًا.</p>`;
 }
 function recCard(r, isMp3) {
   const activeSur = S.surahRec.kind === 'mp3' && S.surahRec.id === r.rid;
+  const routeLabel = r.routeLabel || 'طريق ورش كما هو مسجل في المصدر';
   return `<div class="rec-card${activeSur ? ' active' : ''}">
     <div class="rn">${esc(r.name)}</div>
-    <div class="rs">${esc(r.sub || 'ورش عن نافع')} · ورش عن نافع${r.surahs ? ` · ${arD(r.surahs.length)} سورة` : ''}${r.timingReadId ? ' · توقيت آيات متاح' : ''}</div>
-    <div class="ra"><button class="btn btn-sm btn-gold" data-action="rec-play" data-kind="mp3" data-rid="${esc(r.rid)}">▶ تشغيل السورة</button>${r.timingReadId ? `<button class="btn btn-sm${S.ayahRec === r.rid ? ' btn-green' : ''}" data-action="rec-ay-default" data-rid="${esc(r.rid)}">${S.ayahRec === r.rid ? '✓ قارئ الآيات' : 'اعتماد للآيات'}</button>` : ''}</div>
+    <div class="rs">${esc(r.sub || 'ورش عن نافع')} · ${esc(routeLabel)}${r.surahs ? ` · ${arD(r.surahs.length)} سورة` : ''}${r.timingReadId ? ' · توقيت آيات متاح (يُتحقق لكل سورة)' : ' · تلاوة السورة'}</div>
+    <div class="ra"><button class="btn btn-sm btn-gold" data-action="rec-play" data-kind="mp3" data-rid="${esc(r.rid)}">▶ تشغيل السورة</button>${r.timingReadId ? `<button class="btn btn-sm${S.ayahRec === r.rid ? ' btn-green' : ''}" data-action="rec-ay-default" data-rid="${esc(r.rid)}">${S.ayahRec === r.rid ? '✓ قارئ الآيات المفضّل' : 'اختيار للآيات'}</button>` : ''}</div>
   </div>`;
 }
 function mp3Cards() {
@@ -1236,35 +1252,41 @@ async function ensureReciters(force = false) {
   if (payload && Array.isArray(payload.reciters)) {
     for (const r of payload.reciters) for (const m of (r.moshaf || [])) allMoshafs.push({reciter:r,moshaf:m});
   }
-  const list = [];
-  // طريق الأزرق فقط: نعتمد قائمة مستقلة تصرّح بالطريق صراحة، ولا نستنتجه من كلمة «ورش» وحدها.
+  const list = [], seenServers = new Set();
+  // هذا الفهرس يعرّف العناصر صراحة على أنها ورش عن نافع؛ لا نقصرها على طريق الأزرق.
+  // نعرض طريق الأزرق والأصبهاني وغير المحدد مع تسمية المصدر كما هي، ولا نخلط أي رواية أخرى.
   for (const item of candidates) {
-    const tariq = String(item.tariq || '');
-    if (!/(الأزرق|azraq)/i.test(tariq) || !item.server || !item.id) continue;
+    const tariq = String(item.tariq || 'ورش عن نافع');
+    if (!/(ورش|warsh)/i.test(tariq) || !item.server || !item.id) continue;
     const server = String(item.server).endsWith('/') ? String(item.server) : String(item.server) + '/';
-    const match = allMoshafs.find(x => normUrl(x.moshaf.server || x.moshaf.Server) === normUrl(server) && /(ورش|warsh)/i.test(String(x.moshaf.name || x.moshaf.rewaya || '')));
-    const timing = match && timingList.find(t =>
+    const key = normUrl(server); if (seenServers.has(key)) continue;
+    const match = allMoshafs.find(x => normUrl(x.moshaf.server || x.moshaf.Server) === key && /(ورش|warsh)/i.test(String(x.moshaf.name || x.moshaf.rewaya || '')));
+    const timing = timingList.find(t =>
       /(ورش|warsh)/i.test(String(t.rewaya || t.rewayah || '')) &&
-      (String(t.id) === String(match.moshaf.id) || normUrl(t.folder_url) === normUrl(server))
+      (normUrl(t.folder_url) === key || (match && String(t.id) === String(match.moshaf.id)))
     );
+    const routeLabel = /asbahani|الأصبهاني/i.test(tariq) ? 'طريق الأصبهاني' : /azraq|الأزرق/i.test(tariq) ? 'طريق الأزرق' : 'طريق غير محدد في المصدر';
     list.push({
-      rid:'azraq-' + String(item.id), name:String(item.name_ar || item.name_en || 'قارئ'),
-      sub:tariq + (item.country ? ' · ' + item.country : ''), server, surahs:Array.from({length:114},(_,i)=>i+1),
+      rid:'catalog-' + String(item.id), name:String(item.name_ar || item.name_en || 'قارئ'),
+      sub:(item.country ? ({MA:'المغرب',DZ:'الجزائر',SA:'السعودية',EG:'مصر'}[item.country] || item.country) : ''),
+      routeLabel, server, surahs:Array.from({length:114},(_,i)=>i+1),
       timingReadId:timing ? Number(timing.id) : null, audioSource:'catalog', mirror:item.mirror || null
     });
+    seenServers.add(key);
   }
-  // احتياط أخير من API MP3Quran، لكن لا نقبل إلا ما يصرّح بالطريق الأزرق في اسم الرواية.
-  if (!list.length && allMoshafs.length) {
-    for (const x of allMoshafs) {
-      const m=x.moshaf, title=String(m.name || m.rewaya || '');
-      if (!/(ورش|warsh)/i.test(title) || !/(الأزرق|azraq)/i.test(title)) continue;
-      const server=String(m.server || m.Server || '');
-      const surahList=m.surah_list || m.suras || '';
-      if (!server || !surahList) continue;
-      const surahs=String(surahList).split(',').map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=114);
-      const timing=timingList.find(t=>String(t.id)===String(m.id)&&/(ورش|warsh)/i.test(String(t.rewaya||t.rewayah||'')));
-      list.push({rid:'mp3-'+m.id,name:String(x.reciter.name||'قارئ'),sub:title,server:server.endsWith('/')?server:server+'/',surahs,timingReadId:timing?Number(timing.id):null,audioSource:'mp3quran'});
-    }
+  // نضيف أي تسجيل ورش إضافي موثق من MP3Quran لم يرد في الفهرس المستقل.
+  for (const x of allMoshafs) {
+    const m=x.moshaf, title=String(m.name || m.rewaya || '');
+    if (!/(ورش|warsh)/i.test(title)) continue;
+    const server=String(m.server || m.Server || '');
+    const key=normUrl(server);
+    const surahList=m.surah_list || m.suras || '';
+    if (!server || !surahList || seenServers.has(key)) continue;
+    const surahs=String(surahList).split(',').map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=114);
+    const timing=timingList.find(t=>String(t.id)===String(m.id)&&/(ورش|warsh)/i.test(String(t.rewaya||t.rewayah||'')));
+    const routeLabel = /asbahani|الأصبهاني/i.test(title) ? 'طريق الأصبهاني' : /azraq|الأزرق/i.test(title) ? 'طريق الأزرق' : 'طريق غير محدد في المصدر';
+    list.push({rid:'mp3-'+m.id,name:String(x.reciter.name||'قارئ'),sub:title,routeLabel,server:server.endsWith('/')?server:server+'/',surahs,timingReadId:timing?Number(timing.id):null,audioSource:'mp3quran'});
+    seenServers.add(key);
   }
   MP3_REC = list;
   if (MP3_REC.length && (!S.surahRec || S.surahRec.kind !== 'mp3' || !MP3_REC.some(r => r.rid === S.surahRec.id))) {

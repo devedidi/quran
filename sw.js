@@ -1,6 +1,6 @@
-/* نُور المُصحف — ورش عن نافع | Service Worker v5
+/* نُور المُصحف — ورش عن نافع | Service Worker v6
    يحذف تلقائيًا كل ذاكرات النسخ القديمة (حفص) عند التفعيل. */
-const VER = 'v5';
+const VER = 'v6';
 const SHELL = `noor-warsh-shell-${VER}`;
 const DATA  = `noor-warsh-data-${VER}`;
 const MEDIA = `noor-warsh-media-${VER}`;
@@ -8,8 +8,9 @@ const KEEP  = [SHELL, DATA, MEDIA, 'noor-warsh-full-v3'];
 const SHELL_ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
 
 const DATA_HOSTS  = ['quran-json.risanb.com', 'quran-json.risan.workers.dev', 'api.alquran.cloud', 'cdn.jsdelivr.net', 'raw.githubusercontent.com'];
-const MEDIA_HOSTS = ['everyayah.com', 'fonts.googleapis.com', 'fonts.gstatic.com'];
-const isMediaHost = h => MEDIA_HOSTS.includes(h) || /^server\d+\.mp3quran\.net$/.test(h);
+const MEDIA_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+const isMediaHost = h => MEDIA_HOSTS.includes(h);
+const isAudioHost = h => /^server\d+\.mp3quran\.net$/.test(h);
 const isDataHost  = h => DATA_HOSTS.includes(h) || h === 'mp3quran.net' || h === 'www.mp3quran.net';
 
 self.addEventListener('install', e => {
@@ -29,34 +30,16 @@ async function trim(cache, max = 90) {
   if (keys.length > max) await Promise.all(keys.slice(0, keys.length - max).map(k => cache.delete(k)));
 }
 
-async function rangeResponse(req, res) {
-  const m = /bytes=(\d*)-(\d*)/.exec(req.headers.get('range') || '');
-  if (!m) return res;
-  const buf = await res.clone().arrayBuffer();
-  const total = buf.byteLength;
-  if (!total) return res;
-  const start = m[1] ? parseInt(m[1], 10) : 0;
-  let end = m[2] ? parseInt(m[2], 10) : total - 1;
-  if (isNaN(start) || start >= total)
-    return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${total}` } });
-  end = Math.min(end, total - 1);
-  return new Response(buf.slice(start, end + 1), {
-    status: 206, statusText: 'Partial Content',
-    headers: {
-      'Content-Type': res.headers.get('Content-Type') || 'audio/mpeg',
-      'Content-Range': `bytes ${start}-${end}/${total}`,
-      'Content-Length': String(end - start + 1),
-      'Accept-Ranges': 'bytes'
-    }
-  });
-}
-
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  /* ملفات الصوت والخطوط: من الذاكرة أولًا + دعم التقديم/الترجيع */
+  /* الصوت: اتركه للمتصفح مباشرة حتى يستخدم HTTP Range والبث التدريجي.
+     لا نخزّن ملفات MP3 ولا نحولها إلى تنزيل كامل داخل Service Worker. */
+  if (isAudioHost(url.hostname)) return;
+
+  /* الخطوط فقط: يمكن تخزينها مؤقتًا دون التأثير على بث الصوت. */
   if (isMediaHost(url.hostname)) {
     e.respondWith((async () => {
       const cache = await caches.open(MEDIA);
