@@ -1,21 +1,21 @@
-/* نُور المُصحف — ورش عن نافع | Service Worker v4
-   يحذف كل ذاكرات النسخ القديمة (حفص) عند التفعيل. */
-const VER = 'v4';
+/* نُور المُصحف — ورش عن نافع | Service Worker v3
+   يحذف تلقائيًا كل ذاكرات النسخ القديمة (حفص) عند التفعيل. */
+const VER = 'v3';
 const SHELL = `noor-warsh-shell-${VER}`;
 const DATA  = `noor-warsh-data-${VER}`;
 const MEDIA = `noor-warsh-media-${VER}`;
-const FULL  = 'noor-warsh-full-v2';
-const KEEP  = [SHELL, DATA, MEDIA, FULL];
+const KEEP  = [SHELL, DATA, MEDIA, 'noor-warsh-full-v1'];
 const SHELL_ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
 
-const DATA_HOSTS  = ['api.alquran.cloud', 'cdn.jsdelivr.net', 'raw.githubusercontent.com', 'mp3quran.net', 'www.mp3quran.net'];
-const MEDIA_HOSTS = ['everyayah.com', 'www.everyayah.com', 'fonts.googleapis.com', 'fonts.gstatic.com'];
+const DATA_HOSTS  = ['api.alquran.cloud', 'cdn.jsdelivr.net', 'raw.githubusercontent.com'];
+const MEDIA_HOSTS = ['everyayah.com', 'fonts.googleapis.com', 'fonts.gstatic.com'];
 const isMediaHost = h => MEDIA_HOSTS.includes(h) || /^server\d+\.mp3quran\.net$/.test(h);
-const isDataHost  = h => DATA_HOSTS.includes(h);
+const isDataHost  = h => DATA_HOSTS.includes(h) || (h === 'mp3quran.net');
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_ASSETS)).then(() => self.skipWaiting()));
 });
+
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
@@ -28,6 +28,7 @@ async function trim(cache, max = 90) {
   const keys = await cache.keys();
   if (keys.length > max) await Promise.all(keys.slice(0, keys.length - max).map(k => cache.delete(k)));
 }
+
 async function rangeResponse(req, res) {
   const m = /bytes=(\d*)-(\d*)/.exec(req.headers.get('range') || '');
   if (!m) return res;
@@ -55,6 +56,7 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
+  /* ملفات الصوت والخطوط: من الذاكرة أولًا + دعم التقديم/الترجيع */
   if (isMediaHost(url.hostname)) {
     e.respondWith((async () => {
       const cache = await caches.open(MEDIA);
@@ -68,23 +70,35 @@ self.addEventListener('fetch', e => {
       }
       try {
         const res = await fetch(req);
-        if (res && (res.ok || res.type === 'opaque')) { await cache.put(req, res.clone()); trim(cache); }
+        if (res && (res.ok || res.type === 'opaque')) {
+          await cache.put(req, res.clone());
+          trim(cache);
+        }
         return res;
-      } catch (_) { return new Response(null, { status: 504 }); }
+      } catch (_) {
+        return new Response(null, { status: 504 });
+      }
     })());
     return;
   }
 
+  /* واجهات البيانات (نص ورش + قائمة القرّاء): ذاكرة فورية + تحديث بالخلفية */
   if (isDataHost(url.hostname)) {
     e.respondWith((async () => {
       const cache = await caches.open(DATA);
       const hit = await cache.match(req);
-      const net = fetch(req).then(r => { if (r && r.ok) cache.put(req, r.clone()); return r; }).catch(() => null);
-      return hit || (await net) || new Response('{"error":"offline"}', { status: 503, headers: { 'Content-Type': 'application/json' } });
+      const net = fetch(req).then(r => {
+        if (r && r.ok) cache.put(req, r.clone());
+        return r;
+      }).catch(() => null);
+      return hit || (await net) || new Response('{"error":"offline"}', {
+        status: 503, headers: { 'Content-Type': 'application/json' }
+      });
     })());
     return;
   }
 
+  /* غلاف التطبيق */
   if (url.origin === location.origin) {
     e.respondWith((async () => {
       try {
@@ -95,7 +109,8 @@ self.addEventListener('fetch', e => {
       } catch (_) {
         const hit = await caches.match(req);
         if (hit) return hit;
-        if (req.mode === 'navigate') return (await caches.match('./index.html')) || (await caches.match('./'));
+        if (req.mode === 'navigate')
+          return (await caches.match('./index.html')) || (await caches.match('./'));
         return new Response(null, { status: 504 });
       }
     })());
