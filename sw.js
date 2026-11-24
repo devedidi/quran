@@ -1,16 +1,16 @@
-/* نُور المُصحف — ورش عن نافع | Service Worker v3
+/* نُور المُصحف — ورش عن نافع | Service Worker v5
    يحذف تلقائيًا كل ذاكرات النسخ القديمة (حفص) عند التفعيل. */
-const VER = 'v3';
+const VER = 'v5';
 const SHELL = `noor-warsh-shell-${VER}`;
 const DATA  = `noor-warsh-data-${VER}`;
 const MEDIA = `noor-warsh-media-${VER}`;
-const KEEP  = [SHELL, DATA, MEDIA, 'noor-warsh-full-v1'];
+const KEEP  = [SHELL, DATA, MEDIA, 'noor-warsh-full-v3'];
 const SHELL_ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
 
-const DATA_HOSTS  = ['api.alquran.cloud', 'cdn.jsdelivr.net', 'raw.githubusercontent.com'];
+const DATA_HOSTS  = ['quran-json.risanb.com', 'quran-json.risan.workers.dev', 'api.alquran.cloud', 'cdn.jsdelivr.net', 'raw.githubusercontent.com'];
 const MEDIA_HOSTS = ['everyayah.com', 'fonts.googleapis.com', 'fonts.gstatic.com'];
 const isMediaHost = h => MEDIA_HOSTS.includes(h) || /^server\d+\.mp3quran\.net$/.test(h);
-const isDataHost  = h => DATA_HOSTS.includes(h) || (h === 'mp3quran.net');
+const isDataHost  = h => DATA_HOSTS.includes(h) || h === 'mp3quran.net' || h === 'www.mp3quran.net';
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_ASSETS)).then(() => self.skipWaiting()));
