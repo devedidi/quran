@@ -1459,7 +1459,7 @@ document.addEventListener('click', e => {
     case 'print-surah': printSurah(ROUTE.s); break;
     case 'retry-surah': delete MEM[ROUTE.s]; fillReader(ROUTE.a || 0); break;
     case 'ayah-select': openAyahBar(s, a); break;
-    case 'ayah-play': playAyah(s, a, false); break;
+    case 'ayah-play': playAyah(s, a, true); break;
     case 'ayah-bm': toggleBm(s, a); break;
     case 'ayah-copy': { const arr = MEM[s]; if (arr) copyText(arr[a - 1].t + `\n﴿${SURA(s).name}: ${arD(a)}﴾ — رواية ورش عن نافع`, 'الآية'); break; }
     case 'bar-close': closeAyahBar(); break;
