@@ -17,7 +17,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ====================== نظام الألوان — ورش ====================== */
 :root{
   --g900:#051f16; --g800:#0a2f22; --g700:#0d3f2e; --g600:#14563f; --g500:#1c6b4e; --g400:#2e8b63;
   --gold:#d9b45c; --gold2:#b8892f; --gold3:#f0cf8a; --goldink:#8f6b1f;
@@ -36,44 +35,28 @@
   --shadow:0 12px 34px rgba(0,0,0,.5);
   --pattern:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cg fill='none' stroke='%23d9b45c' stroke-width='1' opacity='.05'%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
 }
-/* ====================== أساس ====================== */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:'IBM Plex Sans Arabic',system-ui,sans-serif; background:var(--bg); color:var(--text);
-  min-height:100vh; overflow-x:hidden; line-height:1.7;
-  background-image:var(--pattern);
-  transition:background-color .4s,color .4s;
-}
+body{font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.7;background-image:var(--pattern);transition:background-color .4s,color .4s}
 ::selection{background:var(--gold);color:var(--g900)}
 :focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:6px}
 img{max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,select{font:inherit;color:var(--text)}
-/* شريط تمرير بهوية التطبيق */
 *{scrollbar-width:thin;scrollbar-color:var(--gold2) transparent}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:rgba(13,63,46,.08)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold3),var(--gold2));border-radius:8px;border:2px solid var(--bg)}
 ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
-/* طبقات الخلفية الحية */
 .aura{position:fixed;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;opacity:.5}
 .aura.a{width:520px;height:520px;top:-180px;right:-140px;background:radial-gradient(circle,rgba(28,107,78,.35),transparent 70%);animation:drift 26s ease-in-out infinite alternate}
 .aura.b{width:460px;height:460px;bottom:-160px;left:-120px;background:radial-gradient(circle,rgba(217,180,92,.28),transparent 70%);animation:drift 32s ease-in-out infinite alternate-reverse}
 [data-theme="night"] .aura.a{background:radial-gradient(circle,rgba(46,139,99,.22),transparent 70%)}
 [data-theme="night"] .aura.b{background:radial-gradient(circle,rgba(217,180,92,.14),transparent 70%)}
 @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(-60px,50px) scale(1.15)}}
-.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
-/* ====================== الترويسة ====================== */
-#topbar{
-  position:fixed;top:0;right:0;left:0;z-index:100;height:var(--headH);
-  display:flex;align-items:center;gap:14px;padding:0 clamp(12px,3vw,28px);
-  background:var(--surface);background:color-mix(in srgb,var(--surface) 86%,transparent);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line);
-}
+.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+#topbar{position:fixed;top:0;right:0;left:0;z-index:100;height:var(--headH);display:flex;align-items:center;gap:14px;padding:0 clamp(12px,3vw,28px);background:var(--surface);background:color-mix(in srgb,var(--surface) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .brand img{width:42px;height:42px;border-radius:11px;box-shadow:0 3px 10px rgba(10,47,34,.35)}
 .brand h1{font-family:'Amiri',serif;font-size:1.25rem;line-height:1.2;color:var(--g600)}
@@ -82,42 +65,26 @@ input,select{font:inherit;color:var(--text)}
 [data-theme="night"] .brand small{color:var(--gold)}
 #mainNav{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto;scrollbar-width:none}
 #mainNav::-webkit-scrollbar{display:none}
-#mainNav a{
-  padding:7px 13px;border-radius:99px;font-size:.86rem;font-weight:600;white-space:nowrap;
-  color:var(--muted);border:1px solid transparent;transition:.2s;
-}
+#mainNav a{padding:7px 13px;border-radius:99px;font-size:.86rem;font-weight:600;white-space:nowrap;color:var(--muted);border:1px solid transparent;transition:.2s}
 #mainNav a:hover{color:var(--g600);border-color:var(--line)}
 [data-theme="night"] #mainNav a:hover{color:var(--gold3)}
 #mainNav a.on{background:linear-gradient(135deg,var(--gold3),var(--gold));color:var(--g900);box-shadow:0 3px 10px rgba(184,137,47,.35)}
 .top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
 #netDot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(31,122,77,.18)}
 #netDot.off{background:var(--warn);box-shadow:0 0 0 3px rgba(176,119,20,.2)}
-.icon-btn{
-  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:1.05rem;
-  border:1px solid var(--line);background:var(--surface2);transition:.2s;
-}
+.icon-btn{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:1.05rem;border:1px solid var(--line);background:var(--surface2);transition:.2s}
 .icon-btn:hover{border-color:var(--gold2);transform:translateY(-1px)}
 .icon-btn:active{transform:scale(.94)}
 #installBtn{display:none;width:auto;padding:0 12px;font-size:.78rem;font-weight:700;color:var(--g700);gap:5px}
 [data-theme="night"] #installBtn{color:var(--gold3)}
-/* ====================== البنية ====================== */
 main{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:calc(var(--headH) + 22px) clamp(12px,3vw,24px) 60px;transition:padding .3s}
 body.player-on main{padding-bottom:calc(var(--playerH) + 70px)}
 h2.sec{font-family:'Amiri',serif;font-size:1.45rem;color:var(--g700);display:flex;align-items:center;gap:10px;margin:26px 0 14px}
 [data-theme="night"] h2.sec{color:var(--gold3)}
 h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(to left,var(--gold2),transparent)}
 .muted{color:var(--muted);font-size:.86rem}
-.card{
-  background:var(--surface);border:1px solid var(--line);border-radius:18px;
-  padding:18px;box-shadow:var(--shadow);position:relative;
-}
-/* أزرار */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  padding:9px 16px;border-radius:12px;font-size:.86rem;font-weight:600;
-  border:1px solid var(--line);background:var(--surface2);color:var(--text);
-  transition:transform .15s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden;
-}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);position:relative}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 16px;border-radius:12px;font-size:.86rem;font-weight:600;border:1px solid var(--line);background:var(--surface2);color:var(--text);transition:transform .15s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden}
 .btn:hover{border-color:var(--gold2);transform:translateY(-1px);box-shadow:0 5px 14px rgba(184,137,47,.18)}
 .btn:active{transform:scale(.96)}
 .btn-gold{background:linear-gradient(135deg,var(--gold3),var(--gold) 55%,var(--gold2));color:var(--g900);border-color:var(--gold2)}
@@ -130,15 +97,9 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(to left,va
 .btn[disabled]{opacity:.45;pointer-events:none}
 .back-btn{color:var(--goldink);font-weight:700;border-color:var(--gold2);background:linear-gradient(135deg,rgba(240,207,138,.25),rgba(217,180,92,.12))}
 [data-theme="night"] .back-btn{color:var(--gold3)}
-select,input[type="number"],input[type="text"],input[type="search"]{
-  padding:9px 12px;border-radius:11px;border:1px solid var(--line);background:var(--surface2);
-  min-height:42px;transition:border-color .2s;
-}
-select{appearance:none;-webkit-appearance:none;padding-inline-end:32px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23b8892f' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:left 12px center;cursor:pointer;max-width:100%}
+select,input[type="number"],input[type="text"],input[type="search"]{padding:9px 12px;border-radius:11px;border:1px solid var(--line);background:var(--surface2);min-height:42px;transition:border-color .2s}
+select{appearance:none;-webkit-appearance:none;padding-inline-end:32px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23b8892f' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 12px center;cursor:pointer;max-width:100%}
 select:focus,input:focus{border-color:var(--gold2);outline:none}
-/* ====================== الرئيسية ====================== */
 .hero{text-align:center;padding:26px 10px 8px}
 .hero .orn{color:var(--gold2);letter-spacing:.55em;font-size:.9rem;margin-bottom:10px}
 .basmala{font-family:'Scheherazade New','Amiri',serif;font-size:clamp(1.9rem,5.4vw,3rem);font-weight:600;color:var(--g700);line-height:2}
@@ -147,6 +108,8 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 [data-theme="night"] .hero .tagline{color:var(--gold)}
 .hero .riwaya{font-size:.8rem;color:var(--muted);margin-top:6px}
 .hero .riwaya b{color:var(--red);font-weight:700}
+.verify-chip{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:4px 14px;border-radius:99px;font-size:.72rem;font-weight:700;background:rgba(31,122,77,.1);color:var(--ok);border:1px solid rgba(31,122,77,.35)}
+.verify-chip.seed{background:rgba(176,119,20,.1);color:var(--warn);border-color:rgba(176,119,20,.4)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .stat::before{content:"";position:absolute;top:0;right:0;left:0;height:3px;background:linear-gradient(to left,var(--gold3),var(--g500),var(--gold3))}
@@ -166,19 +129,9 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 .tile b{font-size:.84rem;font-weight:600}
 .mushaf-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
 .mushaf-row label{font-size:.84rem;font-weight:600;color:var(--muted)}
-/* ====================== القارئ ====================== */
-.reader-top{
-  position:sticky;top:var(--headH);z-index:40;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
-  padding:10px 12px;margin:0 -6px 14px;border-radius:0 0 16px 16px;
-  background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
-}
+.reader-top{position:sticky;top:var(--headH);z-index:40;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;margin:0 -6px 14px;border-radius:0 0 16px 16px;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .reader-tools{display:flex;flex-wrap:wrap;gap:6px;margin-inline-start:auto}
-.surah-frame{
-  margin:8px auto 4px;max-width:640px;text-align:center;padding:14px 20px;position:relative;
-  border:2px solid var(--gold2);border-radius:14px;background:var(--surface);
-  display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:var(--shadow);
-}
+.surah-frame{margin:8px auto 4px;max-width:640px;text-align:center;padding:14px 20px;position:relative;border:2px solid var(--gold2);border-radius:14px;background:var(--surface);display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:var(--shadow)}
 .surah-frame::before{content:"";position:absolute;inset:5px;border:1px solid var(--gold);border-radius:9px;opacity:.55;pointer-events:none}
 .sf-name{font-family:'Amiri',serif;font-size:clamp(1.6rem,4.5vw,2.2rem);color:var(--g700)}
 [data-theme="night"] .sf-name{color:var(--gold3)}
@@ -186,16 +139,9 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 .sf-meta{text-align:center;font-size:.8rem;color:var(--muted);margin-bottom:6px}
 .basmala-line{text-align:center;font-family:'Scheherazade New',serif;font-size:1.7rem;color:var(--g600);padding:10px 0 16px;line-height:2}
 [data-theme="night"] .basmala-line{color:var(--gold)}
-.range-chip{display:flex;align-items:center;gap:8px;justify-content:center;margin:0 auto 12px;width:fit-content;max-width:100%;
-  padding:6px 14px;border-radius:99px;font-size:.8rem;font-weight:600;background:rgba(20,102,107,.1);color:var(--info);border:1px solid rgba(20,102,107,.3)}
+.range-chip{display:flex;align-items:center;gap:8px;justify-content:center;margin:0 auto 12px;width:fit-content;max-width:100%;padding:6px 14px;border-radius:99px;font-size:.8rem;font-weight:600;background:rgba(20,102,107,.1);color:var(--info);border:1px solid rgba(20,102,107,.3)}
 [data-theme="night"] .range-chip{color:#7fd0d6}
-/* نص المصحف */
-.qflow{
-  font-family:'Scheherazade New','Amiri',serif;font-size:var(--qsize);line-height:2.25;
-  color:var(--qtext);text-align:justify;text-align-last:center;
-  background:var(--surface);border:1px solid var(--line);border-radius:18px;
-  padding:clamp(16px,3.5vw,34px);box-shadow:var(--shadow);
-}
+.qflow{font-family:'Scheherazade New','Amiri',serif;font-size:var(--qsize);line-height:2.25;color:var(--qtext);text-align:justify;text-align-last:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3.5vw,34px);box-shadow:var(--shadow)}
 .qflow .ayah{cursor:pointer;border-radius:6px;padding:0 2px;transition:background .25s;scroll-margin-top:calc(var(--headH) + 120px)}
 .qflow .ayah:hover{background:rgba(217,180,92,.14)}
 .qflow .ayah.selected{background:rgba(217,180,92,.24);box-shadow:0 0 0 1px var(--gold2)}
@@ -215,14 +161,12 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 .ac-actions .icon-btn{width:33px;height:33px;font-size:.88rem;border-radius:9px}
 .ac-actions .bm-on{color:var(--gold2);border-color:var(--gold2);background:rgba(217,180,92,.14)}
 .qtext{font-family:'Scheherazade New','Amiri',serif;font-size:var(--qsize);line-height:2.2;color:var(--qtext);cursor:pointer}
-/* الوردة — علامة نهاية الآية */
 .ros{position:relative;display:inline-flex;width:var(--rs,1.15em);height:var(--rs,1.15em);vertical-align:middle;margin:0 .3em;flex-shrink:0}
 .ros svg{position:absolute;inset:0;width:100%;height:100%}
 .ros svg rect{fill:none;stroke:var(--gold2);stroke-width:2.4}
 .ros b{position:absolute;inset:0;display:grid;place-items:center;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:600;font-size:calc(var(--rs,1.15em)*.36);color:var(--goldink);line-height:1}
 [data-theme="night"] .ros b{color:var(--gold3)}
 .reader-bottom{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
-/* ====================== الفهرس ====================== */
 .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .tabs button{padding:8px 18px;border-radius:99px;border:1px solid var(--line);font-weight:600;font-size:.86rem;background:var(--surface);transition:.2s}
 .tabs button.on{background:linear-gradient(135deg,var(--g500),var(--g700));color:#f5ecd7;border-color:var(--g600)}
@@ -242,7 +186,7 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 .badge.due{background:rgba(176,119,20,.13);color:var(--warn);border:1px solid rgba(176,119,20,.4)}
 .badge.late{background:rgba(179,38,30,.1);color:var(--danger);border:1px solid rgba(179,38,30,.35)}
 .badge.okb{background:rgba(31,122,77,.12);color:var(--ok);border:1px solid rgba(31,122,77,.35)}
-/* ====================== البحث ====================== */
+.badge.check{background:rgba(20,102,107,.1);color:var(--info);border:1px solid rgba(20,102,107,.3)}
 .search-box{display:flex;gap:8px;margin:12px 0}
 .search-box input{flex:1;font-size:1rem}
 .s-result{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:10px;transition:.2s;display:block}
@@ -251,7 +195,6 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 .s-result mark{background:linear-gradient(180deg,rgba(240,207,138,.9),rgba(217,180,92,.75));color:var(--g900);border-radius:4px;padding:0 2px}
 .s-head{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:.78rem;color:var(--goldink);font-weight:700}
 [data-theme="night"] .s-head{color:var(--gold)}
-/* ====================== التلاوات ====================== */
 .rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}
 .rec-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;transition:.2s}
 .rec-card:hover{border-color:var(--gold2)}
@@ -259,7 +202,6 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 .rec-card .rn{font-weight:700;font-size:1rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .rec-card .rs{font-size:.74rem;color:var(--muted)}
 .rec-card .ra{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
-/* ====================== الحفظ ====================== */
 .plan-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
 .plan-form .f{display:flex;flex-direction:column;gap:4px}
 .plan-form label{font-size:.76rem;font-weight:600;color:var(--muted)}
@@ -273,16 +215,8 @@ select:focus,input:focus{border-color:var(--gold2);outline:none}
 .seg-dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
 .seg-dots i.f{background:linear-gradient(135deg,var(--gold3),var(--gold2))}
 .seg-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
-/* ====================== المشغّل ====================== */
-#player{
-  position:fixed;right:0;left:0;bottom:0;z-index:90;display:none;
-  background:var(--surface);background:color-mix(in srgb,var(--surface) 94%,transparent);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-top:2px solid var(--gold2);box-shadow:0 -8px 30px rgba(10,47,34,.25);
-  padding:10px clamp(10px,3vw,26px) calc(10px + env(safe-area-inset-bottom));
-  animation:rise .35s ease-out;
-}
-body.player-on #player{display:grid;grid-template-columns:auto auto 1fr auto;gap:8px 16px;align-items:center}
+#player{position:fixed;right:0;left:0;bottom:0;z-index:90;display:none;background:var(--surface);background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:2px solid var(--gold2);box-shadow:0 -8px 30px rgba(10,47,34,.25);padding:10px clamp(10px,3vw,26px) calc(10px + env(safe-area-inset-bottom));animation:rise .35s ease-out}
+body.player-on #player{display:grid;grid-template-columns:auto auto 1fr auto auto;gap:8px 16px;align-items:center}
 @keyframes rise{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .p-info{display:flex;align-items:center;gap:10px;min-width:0}
 .p-info img{width:40px;height:40px;border-radius:10px}
@@ -302,34 +236,22 @@ body.player-on #player{display:grid;grid-template-columns:auto auto 1fr auto;gap
 .p-speeds button{padding:4px 8px;border-radius:8px;font-size:.7rem;font-weight:700;color:var(--muted);border:1px solid transparent}
 .p-speeds button.on{background:linear-gradient(135deg,var(--gold3),var(--gold));color:var(--g900)}
 .p-speeds button:hover{border-color:var(--line)}
-/* شريط الآية المحددة */
-#ayahBar{
-  position:fixed;right:50%;transform:translateX(50%);bottom:calc(var(--playerH) + 14px);z-index:85;display:none;
-  align-items:center;gap:7px;flex-wrap:wrap;justify-content:center;max-width:min(94vw,620px);
-  background:var(--surface);border:1px solid var(--gold2);border-radius:99px;padding:8px 16px;
-  box-shadow:0 10px 30px rgba(10,47,34,.3);animation:rise .3s ease-out;
-}
+#ayahBar{position:fixed;right:50%;transform:translateX(50%);bottom:calc(var(--playerH) + 14px);z-index:85;display:none;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center;max-width:min(94vw,620px);background:var(--surface);border:1px solid var(--gold2);border-radius:99px;padding:8px 16px;box-shadow:0 10px 30px rgba(10,47,34,.3);animation:rise .3s ease-out}
 #ayahBar.on{display:flex}
 #ayahBar b{font-size:.82rem;color:var(--goldink);white-space:nowrap}
 [data-theme="night"] #ayahBar b{color:var(--gold3)}
-/* ====================== التنبيهات ====================== */
 #toasts{position:fixed;top:calc(var(--headH) + 12px);right:50%;transform:translateX(50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;width:min(94vw,480px);pointer-events:none}
-.toast{pointer-events:auto;display:flex;align-items:center;gap:12px;background:var(--g700);color:#f5ecd7;border:1px solid var(--gold2);
-  border-radius:13px;padding:10px 18px;font-size:.85rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.35);animation:drop .3s ease-out;max-width:100%}
+.toast{pointer-events:auto;display:flex;align-items:center;gap:12px;background:var(--g700);color:#f5ecd7;border:1px solid var(--gold2);border-radius:13px;padding:10px 18px;font-size:.85rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.35);animation:drop .3s ease-out;max-width:100%}
 .toast button{color:var(--gold3);font-weight:700;text-decoration:underline;flex-shrink:0}
 @keyframes drop{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
-/* ====================== حالات ====================== */
 .skel{border-radius:12px;background:linear-gradient(90deg,var(--surface) 25%,var(--surface2) 50%,var(--surface) 75%);background-size:200% 100%;animation:shim 1.4s infinite}
 @keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
 .empty{text-align:center;padding:34px 16px;color:var(--muted)}
 .empty i{font-style:normal;font-size:2rem;display:block;color:var(--gold2);margin-bottom:8px}
-.notice{display:flex;align-items:center;gap:8px;justify-content:center;font-size:.76rem;color:var(--warn);padding:8px;border-radius:10px;background:rgba(176,119,20,.08);border:1px dashed rgba(176,119,20,.4);margin-bottom:12px}
+.notice{display:flex;align-items:center;gap:8px;justify-content:center;font-size:.76rem;color:var(--warn);padding:8px;border-radius:10px;background:rgba(176,119,20,.08);border:1px dashed rgba(176,119,20,.4);margin-bottom:12px;flex-wrap:wrap}
 .reveal{opacity:0;transform:translateY(18px);animation:enter .6s ease-out forwards}
 .reveal:nth-child(2){animation-delay:.08s}.reveal:nth-child(3){animation-delay:.16s}.reveal:nth-child(4){animation-delay:.24s}
 @keyframes enter{to{opacity:1;transform:translateY(0)}}
-.io-reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
-.io-reveal.in{opacity:1;transform:none}
-/* ====================== الاستجابة ====================== */
 @media (max-width:900px){
   .home-grid{grid-template-columns:1fr}
   .quick-grid{grid-template-columns:repeat(3,1fr)}
@@ -355,11 +277,7 @@ body.player-on #player{display:grid;grid-template-columns:auto auto 1fr auto;gap
   .btn{padding:8px 12px;font-size:.8rem}
   .p-speeds button{padding:4px 6px}
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
-  html{scroll-behavior:auto}
-}
-/* ====================== الطباعة / PDF ====================== */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}html{scroll-behavior:auto}}
 #printArea{display:none}
 @media print{
   @page{size:A4;margin:16mm}
@@ -401,7 +319,6 @@ noscript .ns{position:fixed;inset:0;display:grid;place-items:center;background:v
 </header>
 
 <main id="view" aria-live="polite"></main>
-
 <div id="ayahBar" role="toolbar" aria-label="إجراءات الآية"></div>
 
 <footer id="player" aria-label="مشغل التلاوة">
@@ -439,7 +356,8 @@ noscript .ns{position:fixed;inset:0;display:grid;place-items:center;background:v
 'use strict';
 /* ============================================================
    نُور المُصحف — رواية ورش عن نافع (حصريًا)
-   النص: quran-warsh | الصوت: everyayah (ورش) + mp3quran (ورش فقط)
+   · النص لا يُعتمد إلا بعد اجتياز فحص علامات ورش (يرفض حفص آليًا)
+   · القرّاء لا يظهرون إلا بعد فحص تشغيل فعلي لكل مصدر
    ============================================================ */
 const $ = s => document.querySelector(s);
 const el = id => document.getElementById(id);
@@ -448,12 +366,11 @@ const arD = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
 const pad3 = n => String(n).padStart(3, '0');
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const parseNum = v => parseInt(String(v).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)), 10);
-const dayKey = (d = new Date()) => `${d.getFullYear()}-${pad3(d.getMonth() + 1)}-${pad3(d.getDate())}`.replace(/-0+/g, m => m); // ISO محلي
 const dKey = (d = new Date()) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-const addDays = (key, n) => { const [y,m,d] = key.split('-').map(Number); const dt = new Date(y, m-1, d + n); return dKey(dt); };
+const addDays = (key, n) => { const [y,m,d] = key.split('-').map(Number); return dKey(new Date(y, m-1, d + n)); };
 const diffDays = (a, b) => { const p = k => { const [y,m,d] = k.split('-').map(Number); return new Date(y, m-1, d); }; return Math.round((p(a) - p(b)) / 864e5); };
 
-/* ---------- بيانات السور (عدّ المدينة — مصحف ورش المطبوع بالمدينة) ---------- */
+/* ---------- بيانات السور ---------- */
 const META = [
 ["الفاتحة",7,"مكية"],["البقرة",286,"مدنية"],["آل عمران",200,"مدنية"],["النساء",176,"مدنية"],["المائدة",120,"مدنية"],
 ["الأنعام",165,"مكية"],["الأعراف",206,"مكية"],["الأنفال",75,"مدنية"],["التوبة",129,"مدنية"],["يونس",109,"مكية"],
@@ -485,50 +402,65 @@ const JUZ = [[1,1],[2,142],[2,253],[3,93],[4,24],[4,148],[5,82],[6,111],[7,88],[
 function juzOf(s, a = 1) { let j = 0; JUZ.forEach((p, i) => { if (p[0] < s || (p[0] === s && p[1] <= a)) j = i; }); return j + 1; }
 function globalToSA(idx) { let r = idx % TOTAL; for (const m of META) { if (r < m.ayahs) return { s: m.n, a: r + 1 }; r -= m.ayahs; } return { s: 1, a: 1 }; }
 
-/* ---------- نسخة احتياطية مضمّنة برواية ورش (تعمل دون اتصال قبل أول تحميل) ---------- */
+/* ---------- نسخة ورش مضمّنة (تعمل دون اتصال دائمًا) ---------- */
 const SEED = {
-1:["بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ","الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ","الرَّحْمَٰنِ الرَّحِيمِ","مَلِكِ يَوْمِ الدِّينِ","إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","اهْدِنَا الصِّرَٰطَ الْمُسْتَقِيمَ","صِرَٰطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمُۥ غَيْرِ الْمَغْضُوبِ عَلَيْهِمُۥ وَلَا الضَّالِّينَ"],
-97:["إِنَّا أَنزَلْنَٰهُ فِي لَيْلَةِ الْقَدْرِ","وَمَا أَدْرَىٰكَ مَا لَيْلَةُ الْقَدْرِ","لَيْلَةُ الْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ","تَنَزَّلُ الْمَلَٰئِكَةُ وَالرُّوحُ فِيهَا بِإِذْنِ رَبِّهِم مِّن كُلِّ أَمْرٍ","سَلَٰمٌ هِيَ حَتَّىٰ مَطْلَعِ الْفَجْرِ"],
-103:["وَالْعَصْرِ","إِنَّ الْإِنسَانَ لَفِي خُسْرٍ","إِلَّا الَّذِينَ ءَامَنُوا وَعَمِلُوا الصَّٰلِحَٰتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ"],
-108:["إِنَّا أَعْطَيْنَٰكَ الْكَوْثَرَ","فَصَلِّ لِرَبِّكَ وَانْحَرْ","إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ"],
-110:["إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ","وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا","فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُ كَانَ تَوَّابًا"],
-112:["قُلْ هُوَ اللَّهُ أَحَدٌ","اللَّهُ الصَّمَدُ","لَمْ يَلِدْ وَلَمْ يُولَدْ","وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ"],
-113:["قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ","مِن شَرِّ مَا خَلَقَ","وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ","وَمِن شَرِّ النَّفَّٰثَاتِ فِي الْعُقَدِ","وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ"],
-114:["قُلْ أَعُوذُ بِرَبِّ النَّاسِ","مَلِكِ النَّاسِ","إِلَٰهِ النَّاسِ","مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ","الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ","مِنَ الْجِنَّةِ وَالنَّاسِ"]
+1:["بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ","ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","مَلِكِ يَوْمِ ٱلدِّينِ","إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ","صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمُۥ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمُۥ وَلَا ٱلضَّآلِّينَ"],
+79:["وَٱلنَّٰزِعَٰتِ غَرْقًا","وَٱلنَّٰشِطَٰتِ نَشْطًا","وَٱلسَّٰبِحَٰتِ سَبْحًا","فَٱلسَّٰبِقَٰتِ سَبْقًا","فَٱلْمُدَبِّرَٰتِ أَمْرًا","يَوْمَ تَرْجُفُ ٱلرَّاجِفَةُ","تَتْبَعُهَا ٱلرَّادِفَةُ","قُلُوبٌ يَوْمَئِذٍ وَاجِفَةٌ","أَبْصَٰرُهَا خَٰشِعَةٌ","يَقُولُونَ أَءِنَّا لَمَرْدُودُونَ فِى ٱلْحَافِرَةِ","أَءِذَا كُنَّا عِظَٰمًا نَّخِرَةً","قَالُوا۟ تِلْكَ إِذًا كَرَّةٌ خَاسِرَةٌ","فَإِنَّمَا هِىَ زَجْرَةٌ وَٰحِدَةٌ","فَإِذَا هُم بِٱلسَّاهِرَةِ","هَلْ أَتَىٰكَ حَدِيثُ مُوسَىٰٓ","إِذْ نَادَىٰهُ رَبُّهُۥ بِٱلْوَادِ ٱلْمُقَدَّسِ طُوًى","ٱذْهَبْ إِلَىٰ فِرْعَوْنَ إِنَّهُۥ طَغَىٰ","فَقُلْ هَل لَّكَ إِلَىٰٓ أَن تَزَكَّىٰ","وَأَهْدِيَكَ إِلَىٰ رَبِّكَ فَتَخْشَىٰ","فَأَرَىٰهُ ٱلْءَايَةَ ٱلْكُبْرَىٰ","فَكَذَّبَ وَعَصَىٰ","ثُمَّ أَدْبَرَ يَسْعَىٰ","فَحَشَرَ فَنَادَىٰ","فَقَالَ أَنَا۠ رَبُّكُمُ ٱلْأَعْلَىٰ","فَأَخَذَهُ ٱللَّهُ نَكَالَ ٱلْءَاخِرَةِ وَٱلْأُولَىٰٓ","إِنَّ فِى ذَٰلِكَ لَعِبْرَةً لِّمَن يَخْشَىٰٓ","ءَأَنتُمْ أَشَدُّ خَلْقًا أَمِ ٱلسَّمَآءُ ۚ بَنَىٰهَا","رَفَعَ سَمْكَهَا فَسَوَّىٰهَا","وَأَغْطَشَ لَيْلَهَا وَأَخْرَجَ ضُحَىٰهَا","وَٱلْأَرْضَ بَعْدَ ذَٰلِكَ دَحَىٰهَآ","أَخْرَجَ مِنْهَا مَآءَهَا وَمَرْعَىٰهَا","وَٱلْجِبَالَ أَرْسَىٰهَا","مَتَٰعًا لَّكُمْ وَلِأَنْعَٰمِكُمْ","فَإِذَا جَآءَتِ ٱلطَّآمَّةُ ٱلْكُبْرَىٰ","يَوْمَ يَتَذَكَّرُ ٱلْإِنسَٰنُ مَا سَعَىٰ","وَبُرِّزَتِ ٱلْجَحِيمُ لِمَن يَرَىٰ","فَأَمَّا مَن طَغَىٰ","وَءَاثَرَ ٱلْحَيَوٰةَ ٱلدُّنْيَا","فَإِنَّ ٱلْجَحِيمَ هِىَ ٱلْمَأْوَىٰ","وَأَمَّا مَنْ خَافَ مَقَامَ رَبِّهِۦ وَنَهَى ٱلنَّفْسَ عَنِ ٱلْهَوَىٰ","فَإِنَّ ٱلْجَنَّةَ هِىَ ٱلْمَأْوَىٰ","يَسْـَٔلُونَكَ عَنِ ٱلسَّاعَةِ أَيَّانَ مُرْسَىٰهَا","فِيمَ أَنتَ مِن ذِكْرَىٰهَا","إِلَىٰ رَبِّكَ مُنتَهَىٰهَا","إِنَّمَآ أَنتَ مُنذِرُ مَن يَخْشَىٰهَا","كَأَنَّهُمْ يَوْمَ يَرَوْنَهَا لَمْ يَلْبَثُوٓا۟ إِلَّا عَشِيَّةً أَوْ ضُحَىٰهَا"],
+80:["عَبَسَ وَتَوَلَّىٰٓ","أَن جَآءَهُ ٱلْأَعْمَىٰ","وَمَا يُدْرِيكَ لَعَلَّهُۥ يَزَّكَّىٰٓ","أَوْ يَذَّكَّرُ فَتَنفَعَهُ ٱلذِّكْرَىٰٓ","أَمَّا مَنِ ٱسْتَغْنَىٰ","فَأَنتَ لَهُۥ تَصَدَّىٰ","وَمَا عَلَيْكَ أَلَّا يَزَّكَّىٰ","وَأَمَّا مَن جَآءَكَ يَسْعَىٰ","وَهُوَ يَخْشَىٰ","فَأَنتَ عَنْهُ تَلَهَّىٰ","كَلَّآ إِنَّهَا تَذْكِرَةٌ","فَمَن شَآءَ ذَكَرَهُۥ","فِى صُحُفٍ مُّكَرَّمَةٍ","مَّرْفُوعَةٍ مُّطَهَّرَةٍ","بِأَيْدِى سَفَرَةٍ","كِرَامٍ بَرَرَةٍ","قُتِلَ ٱلْإِنسَٰنُ مَآ أَكْفَرَهُۥ","مِنْ أَىِّ شَىْءٍ خَلَقَهُۥ","مِن نُّطْفَةٍ خَلَقَهُۥ فَقَدَّرَهُۥ","ثُمَّ ٱلسَّبِيلَ يَسَّرَهُۥ","ثُمَّ أَمَاتَهُۥ فَأَقْبَرَهُۥ","ثُمَّ إِذَا شَآءَ أَنشَرَهُۥ","كَلَّا لَمَّا يَقْضِ مَآ أَمَرَهُۥ","فَلْيَنظُرِ ٱلْإِنسَٰنُ إِلَىٰ طَعَامِهِۦٓ","أَنَّا صَبَبْنَا ٱلْمَآءَ صَبًّا","ثُمَّ شَقَقْنَا ٱلْأَرْضَ شَقًّا","فَأَنبَتْنَا فِيهَا حَبًّا","وَعِنَبًا وَقَضْبًا","وَزَيْتُونًا وَنَخْلًا","وَحَدَآئِقَ غُلْبًا","وَفَٰكِهَةً وَأَبًّا","مَّتَٰعًا لَّكُمْ وَلِأَنْعَٰمِكُمْ","فَإِذَا جَآءَتِ ٱلصَّآخَّةُ","يَوْمَ يَفِرُّ ٱلْمَرْءُ مِنْ أَخِيهِ","وَأُمِّهِۦ وَأَبِيهِ","وَصَٰحِبَتِهِۦ وَبَنِيهِ","لِكُلِّ ٱمْرِئٍ مِّنْهُمْ يَوْمَئِذٍ شَأْنٌ يُغْنِيهِ","وُجُوهٌ يَوْمَئِذٍ مُّسْفِرَةٌ","ضَاحِكَةٌ مُّسْتَبْشِرَةٌ","وَوُجُوهٌ يَوْمَئِذٍ عَلَيْهَا غَبَرَةٌ","تَرْهَقُهَا قَتَرَةٌ","أُو۟لَٰئِكَ هُمُ ٱلْكَفَرَةُ ٱلْفَجَرَةُ"],
+82:["إِذَا ٱلسَّمَآءُ ٱنفَطَرَتْ","وَإِذَا ٱلْكَوَاكِبُ ٱنتَثَرَتْ","وَإِذَا ٱلْبِحَارُ فُجِّرَتْ","وَإِذَا ٱلْقُبُورُ بُعْثِرَتْ","عَلِمَتْ نَفْسٌ مَّا قَدَّمَتْ وَأَخَّرَتْ","يَٰٓأَيُّهَا ٱلْإِنسَٰنُ مَا غَرَّكَ بِرَبِّكَ ٱلْكَرِيمِ","ٱلَّذِى خَلَقَكَ فَسَوَّىٰكَ فَعَدَلَكَ","فِىٓ أَىِّ صُورَةٍ مَّا شَآءَ رَكَّبَكَ","كَلَّا بَلْ تُكَذِّبُونَ بِٱلدِّينِ","وَإِنَّ عَلَيْكُمْ لَحَٰفِظِينَ","كِرَامًا كَٰتِبِينَ","يَعْلَمُونَ مَا تَفْعَلُونَ","إِنَّ ٱلْأَبْرَارَ لَفِى نَعِيمٍ","وَإِنَّ ٱلْفُجَّارَ لَفِى جَحِيمٍ","يَصْلَوْنَهَا يَوْمَ ٱلدِّينِ","وَمَا هُمْ عَنْهَا بِغَآئِبِينَ","وَمَآ أَدْرَىٰكَ مَا يَوْمُ ٱلدِّينِ","ثُمَّ مَآ أَدْرَىٰكَ مَا يَوْمُ ٱلدِّينِ","يَوْمَ لَا تَمْلِكُ نَفْسٌ لِّنَفْسٍ شَيْـًٔا ۖ وَٱلْأَمْرُ يَوْمَئِذٍ لِّلَّهِ"],
+83:["وَيْلٌ لِّلْمُطَفِّفِينَ","ٱلَّذِينَ إِذَا ٱكْتَالُوا۟ عَلَى ٱلنَّاسِ يَسْتَوْفُونَ","وَإِذَا كَالُوهُمْ أَو وَّزَنُوهُمْ يُخْسِرُونَ","أَلَا يَظُنُّ أُو۟لَٰئِكَ أَنَّهُم مَّبْعُوثُونَ","لِيَوْمٍ عَظِيمٍ","يَوْمَ يَقُومُ ٱلنَّاسُ لِرَبِّ ٱلْعَٰلَمِينَ","كَلَّآ إِنَّ كِتَٰبَ ٱلْفُجَّارِ لَفِى سِجِّينٍ","وَمَآ أَدْرَىٰكَ مَا سِجِّينٌ","كِتَٰبٌ مَّرْقُومٌ","وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ","ٱلَّذِينَ يُكَذِّبُونَ بِيَوْمِ ٱلدِّينِ","وَمَا يُكَذِّبُ بِهِۦٓ إِلَّا كُلُّ مُعْتَدٍ أَثِيمٍ","إِذَا تُتْلَىٰ عَلَيْهِ ءَايَٰتُنَا قَالَ أَسَٰطِيرُ ٱلْأَوَّلِينَ","كَلَّا ۖ بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم مَّا كَانُوا۟ يَكْسِبُونَ","كَلَّآ إِنَّهُمْ عَن رَّبِّهِمْ يَوْمَئِذٍ لَّمَحْجُوبُونَ","ثُمَّ إِنَّهُمْ لَصَالُوا۟ ٱلْجَحِيمِ","ثُمَّ يُقَالُ هَٰذَا ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","كَلَّآ إِنَّ كِتَٰبَ ٱلْأَبْرَارِ لَفِى عِلِّيِّينَ","وَمَآ أَدْرَىٰكَ مَا عِلِّيُّونَ","كِتَٰبٌ مَّرْقُومٌ","يَشْهَدُهُ ٱلْمُقَرَّبُونَ","إِنَّ ٱلْأَبْرَارَ لَفِى نَعِيمٍ","عَلَى ٱلْأَرَآئِكِ يَنظُرُونَ","تَعْرِفُ فِى وُجُوهِهِمْ نَضْرَةَ ٱلنَّعِيمِ","يُسْقَوْنَ مِن رَّحِيقٍ مَّخْتُومٍ","خِتَٰمُهُۥ مِسْكٌ ۚ وَفِى ذَٰلِكَ فَلْيَتَنَافَسِ ٱلْمُتَنَٰفِسُونَ","وَمِزَاجُهُۥ مِن تَسْنِيمٍ","عَيْنًا يَشْرَبُ بِهَا ٱلْمُقَرَّبُونَ","إِنَّ ٱلَّذِينَ أَجْرَمُوا۟ كَانُوا۟ مِنَ ٱلَّذِينَ ءَامَنُوا۟ يَضْحَكُونَ","وَإِذَا مَرُّوا۟ بِهِمْ يَتَغَامَزُونَ","وَإِذَا ٱنقَلَبُوٓا۟ إِلَىٰٓ أَهْلِهِمُ ٱنقَلَبُوا۟ فَكِهِينَ","وَإِذَا رَأَوْهُمْ قَالُوٓا۟ إِنَّ هَٰٓؤُلَآءِ لَضَآلُّونَ","وَمَآ أُرْسِلُوا۟ عَلَيْهِمْ حَٰفِظِينَ","فَٱلْيَوْمَ ٱلَّذِينَ ءَامَنُوا۟ مِنَ ٱلْكُفَّارِ يَضْحَكُونَ","عَلَى ٱلْأَرَآئِكِ يَنظُرُونَ","هَلْ ثُوِّبَ ٱلْكُفَّارُ مَا كَانُوا۟ يَفْعَلُونَ"],
+84:["إِذَا ٱلسَّمَآءُ ٱنشَقَّتْ","وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ","وَإِذَا ٱلْأَرْضُ مُدَّتْ","وَأَلْقَتْ مَا فِيهَا وَتَخَلَّتْ","وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ","يَٰٓأَيُّهَا ٱلْإِنسَٰنُ إِنَّكَ كَادِحٌ إِلَىٰ رَبِّكَ كَدْحًا فَمُلَٰقِيهِ","فَأَمَّا مَنْ أُوتِىَ كِتَٰبَهُۥ بِيَمِينِهِۦ","فَسَوْفَ يُحَاسَبُ حِسَابًا يَسِيرًا","وَيَنقَلِبُ إِلَىٰٓ أَهْلِهِۦ مَسْرُورًا","وَأَمَّا مَنْ أُوتِىَ كِتَٰبَهُۥ وَرَآءَ ظَهْرِهِۦ","فَسَوْفَ يَدْعُوا۟ ثُبُورًا","وَيَصْلَىٰ سَعِيرًا","إِنَّهُۥ كَانَ فِىٓ أَهْلِهِۦ مَسْرُورًا","إِنَّهُۥ ظَنَّ أَن لَّن يَحُورَ","بَلَىٰٓ إِنَّ رَبَّهُۥ كَانَ بِهِۦ بَصِيرًا","فَلَآ أُقْسِمُ بِٱلشَّفَقِ","وَٱلَّيْلِ وَمَا وَسَقَ","وَٱلْقَمَرِ إِذَا ٱتَّسَقَ","لَتَرْكَبُنَّ طَبَقًا عَن طَبَقٍ","فَمَا لَهُمْ لَا يُؤْمِنُونَ","وَإِذَا قُرِئَ عَلَيْهِمُ ٱلْقُرْءَانُ لَا يَسْجُدُونَ","بَلِ ٱلَّذِينَ كَفَرُوا۟ يُكَذِّبُونَ","وَٱللَّهُ أَعْلَمُ بِمَا يُوعُونَ","فَبَشِّرْهُم بِعَذَابٍ أَلِيمٍ","إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ لَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍ"],
+85:["وَٱلسَّمَآءِ ذَاتِ ٱلْبُرُوجِ","وَٱلْيَوْمِ ٱلْمَوْعُودِ","وَشَاهِدٍ وَمَشْهُودٍ","قُتِلَ أَصْحَٰبُ ٱلْأُخْدُودِ","ٱلنَّارِ ذَاتِ ٱلْوَقُودِ","إِذْ هُمْ عَلَيْهَا قُعُودٌ","وَهُمْ عَلَىٰ مَا يَفْعَلُونَ بِٱلْمُؤْمِنِينَ شُهُودٌ","وَمَا نَقَمُوا۟ مِنْهُمْ إِلَّآ أَن يُؤْمِنُوا۟ بِٱللَّهِ ٱلْعَزِيزِ ٱلْحَمِيدِ","ٱلَّذِى لَهُۥ مُلْكُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۚ وَٱللَّهُ عَلَىٰ كُلِّ شَىْءٍ شَهِيدٌ","إِنَّ ٱلَّذِينَ فَتَنُوا۟ ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَٰتِ ثُمَّ لَمْ يَتُوبُوا۟ فَلَهُمْ عَذَابُ جَهَنَّمَ وَلَهُمْ عَذَابُ ٱلْحَرِيقِ","إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ لَهُمْ جَنَّٰتٌ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ ۚ ذَٰلِكَ ٱلْفَوْزُ ٱلْكَبِيرُ","إِنَّ بَطْشَ رَبِّكَ لَشَدِيدٌ","إِنَّهُۥ هُوَ يُبْدِئُ وَيُعِيدُ","وَهُوَ ٱلْغَفُورُ ٱلْوَدُودُ","ذُو ٱلْعَرْشِ ٱلْمَجِيدُ","فَعَّالٌ لِّمَا يُرِيدُ","هَلْ أَتَىٰكَ حَدِيثُ ٱلْجُنُودِ","فِرْعَوْنَ وَثَمُودَ","بَلِ ٱلَّذِينَ كَفَرُوا۟ فِى تَكْذِيبٍ","وَٱللَّهُ مِن وَرَآئِهِم مُّحِيطٌ","بَلْ هُوَ قُرْءَانٌ مَّجِيدٌ","فِى لَوْحٍ مَّحْفُوظٍ"],
+87:["سَبِّحِ ٱسْمَ رَبِّكَ ٱلْأَعْلَى","ٱلَّذِى خَلَقَ فَسَوَّىٰ","وَٱلَّذِى قَدَّرَ فَهَدَىٰ","وَٱلَّذِىٓ أَخْرَجَ ٱلْمَرْعَىٰ","فَجَعَلَهُۥ غُثَآءً أَحْوَىٰ","سَنُقْرِئُكَ فَلَا تَنسَىٰٓ","إِلَّا مَا شَآءَ ٱللَّهُ ۚ إِنَّهُۥ يَعْلَمُ ٱلْجَهْرَ وَمَا يَخْفَىٰ","وَنُيَسِّرُكَ لِلْيُسْرَىٰ","فَذَكِّرْ إِن نَّفَعَتِ ٱلذِّكْرَىٰ","سَيَذَّكَّرُ مَن يَخْشَىٰ","وَيَتَجَنَّبُهَا ٱلْأَشْقَى","ٱلَّذِى يَصْلَى ٱلنَّارَ ٱلْكُبْرَىٰ","ثُمَّ لَا يَمُوتُ فِيهَا وَلَا يَحْيَىٰ","قَدْ أَفْلَحَ مَن تَزَكَّىٰ","وَذَكَرَ ٱسْمَ رَبِّهِۦ فَصَلَّىٰ","بَلْ تُؤْثِرُونَ ٱلْحَيَوٰةَ ٱلدُّنْيَا","وَٱلْءَاخِرَةُ خَيْرٌ وَأَبْقَىٰٓ","إِنَّ هَٰذَا لَفِى ٱلصُّحُفِ ٱلْأُولَىٰ","صُحُفِ إِبْرَٰهِيمَ وَمُوسَىٰ"],
+88:["هَلْ أَتَىٰكَ حَدِيثُ ٱلْغَٰشِيَةِ","وُجُوهٌ يَوْمَئِذٍ خَٰشِعَةٌ","عَامِلَةٌ نَّاصِبَةٌ","تَصْلَىٰ نَارًا حَامِيَةً","تُسْقَىٰ مِنْ عَيْنٍ ءَانِيَةٍ","لَّيْسَ لَهُمْ طَعَامٌ إِلَّا مِن ضَرِيعٍ","لَّا يُسْمِنُ وَلَا يُغْنِى مِن جُوعٍ","وُجُوهٌ يَوْمَئِذٍ نَّاعِمَةٌ","لِّسَعْيِهَا رَاضِيَةٌ","فِى جَنَّةٍ عَالِيَةٍ","لَّا تَسْمَعُ فِيهَا لَٰغِيَةً","فِيهَا عَيْنٌ جَارِيَةٌ","فِيهَا سُرُرٌ مَّرْفُوعَةٌ","وَأَكْوَابٌ مَّوْضُوعَةٌ","وَنَمَارِقُ مَصْفُوفَةٌ","وَزَرَابِىُّ مَبْثُوثَةٌ","أَفَلَا يَنظُرُونَ إِلَى ٱلْإِبِلِ كَيْفَ خُلِقَتْ","وَإِلَى ٱلسَّمَآءِ كَيْفَ رُفِعَتْ","وَإِلَى ٱلْجِبَالِ كَيْفَ نُصِبَتْ","وَإِلَى ٱلْأَرْضِ كَيْفَ سُطِحَتْ","فَذَكِّرْ إِنَّمَآ أَنتَ مُذَكِّرٌ","لَّسْتَ عَلَيْهِم بِمُصَيْطِرٍ","إِلَّا مَن تَوَلَّىٰ وَكَفَرَ","فَيُعَذِّبُهُ ٱللَّهُ ٱلْعَذَابَ ٱلْأَكْبَرَ","إِنَّ إِلَيْنَآ إِيَابَهُمْ","ثُمَّ إِنَّ عَلَيْنَا حِسَابَهُم"],
+90:["لَآ أُقْسِمُ بِهَٰذَا ٱلْبَلَدِ","وَأَنتَ حِلٌّ بِهَٰذَا ٱلْبَلَدِ","وَوَالِدٍ وَمَا وَلَدَ","لَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ فِى كَبَدٍ","أَيَحْسَبُ أَن لَّن يَقْدِرَ عَلَيْهِ أَحَدٌ","يَقُولُ أَهْلَكْتُ مَالًا لُّبَدًا","أَيَحْسَبُ أَن لَّمْ يَرَهُۥٓ أَحَدٌ","أَلَمْ نَجْعَل لَّهُۥ عَيْنَيْنِ","وَلِسَانًا وَشَفَتَيْنِ","وَهَدَيْنَٰهُ ٱلنَّجْدَيْنِ","فَلَا ٱقْتَحَمَ ٱلْعَقَبَةَ","وَمَآ أَدْرَىٰكَ مَا ٱلْعَقَبَةُ","فَكُّ رَقَبَةٍ","أَوْ إِطْعَٰمٌ فِى يَوْمٍ ذِى مَسْغَبَةٍ","يَتِيمًا ذَا مَقْرَبَةٍ","أَوْ مِسْكِينًا ذَا مَتْرَبَةٍ","ثُمَّ كَانَ مِنَ ٱلَّذِينَ ءَامَنُوا۟ وَتَوَاصَوْا۟ بِٱلصَّبْرِ وَتَوَاصَوْا۟ بِٱلْمَرْحَمَةِ","أُو۟لَٰئِكَ أَصْحَٰبُ ٱلْمَيْمَنَةِ","وَٱلَّذِينَ كَفَرُوا۟ بِـَٔايَٰتِنَا هُمْ أَصْحَٰبُ ٱلْمَشْـَٔمَةِ","عَلَيْهِمْ نَارٌ مُّؤْصَدَةٌ"],
+91:["وَٱلشَّمْسِ وَضُحَىٰهَا","وَٱلْقَمَرِ إِذَا تَلَىٰهَا","وَٱلنَّهَارِ إِذَا جَلَّىٰهَا","وَٱلَّيْلِ إِذَا يَغْشَىٰهَا","وَٱلسَّمَآءِ وَمَا بَنَىٰهَا","وَٱلْأَرْضِ وَمَا طَحَىٰهَا","وَنَفْسٍ وَمَا سَوَّىٰهَا","فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَىٰهَا","قَدْ أَفْلَحَ مَن زَكَّىٰهَا","وَقَدْ خَابَ مَن دَسَّىٰهَا","كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ","إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا","فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَٰهَا","فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا","فَلَا يَخَافُ عُقْبَٰهَا"],
+92:["وَٱلَّيْلِ إِذَا يَغْشَىٰ","وَٱلنَّهَارِ إِذَا تَجَلَّىٰ","وَمَا خَلَقَ ٱلذَّكَرَ وَٱلْأُنثَىٰٓ","إِنَّ سَعْيَكُمْ لَشَتَّىٰ","فَأَمَّا مَنْ أَعْطَىٰ وَٱتَّقَىٰ","وَصَدَّقَ بِٱلْحُسْنَىٰ","فَسَنُيَسِّرُهُۥ لِلْيُسْرَىٰ","وَأَمَّا مَنۢ بَخِلَ وَٱسْتَغْنَىٰ","وَكَذَّبَ بِٱلْحُسْنَىٰ","فَسَنُيَسِّرُهُۥ لِلْعُسْرَىٰ","وَمَا يُغْنِى عَنْهُ مَالُهُۥٓ إِذَا تَرَدَّىٰٓ","إِنَّ عَلَيْنَا لَلْهُدَىٰ","وَإِنَّ لَنَا لَلْءَاخِرَةَ وَٱلْأُولَىٰ","فَأَنذَرْتُكُمْ نَارًا تَلَظَّىٰ","لَا يَصْلَىٰهَآ إِلَّا ٱلْأَشْقَى","ٱلَّذِى كَذَّبَ وَتَوَلَّىٰ","وَسَيُجَنَّبُهَا ٱلْأَتْقَى","ٱلَّذِى يُؤْتِى مَالَهُۥ يَتَزَكَّىٰ","وَمَا لِأَحَدٍ عِندَهُۥ مِن نِّعْمَةٍ تُجْزَىٰٓ","إِلَّا ٱبْتِغَآءَ وَجْهِ رَبِّهِ ٱلْأَعْلَىٰ","وَلَسَوْفَ يَرْضَىٰ"],
+93:["وَٱلضُّحَىٰ","وَٱلَّيْلِ إِذَا سَجَىٰ","مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ","وَلَلْءَاخِرَةُ خَيْرٌ لَّكَ مِنَ ٱلْأُولَىٰ","وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰٓ","أَلَمْ يَجِدْكَ يَتِيمًا فَـَٔاوَىٰ","وَوَجَدَكَ ضَآلًّا فَهَدَىٰ","وَوَجَدَكَ عَآئِلًا فَأَغْنَىٰ","فَأَمَّا ٱلْيَتِيمَ فَلَا تَقْهَرْ","وَأَمَّا ٱلسَّآئِلَ فَلَا تَنْهَرْ","وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ"],
+94:["أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ","وَوَضَعْنَا عَنكَ وِزْرَكَ","ٱلَّذِىٓ أَنقَضَ ظَهْرَكَ","وَرَفَعْنَا لَكَ ذِكْرَكَ","فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا","إِنَّ مَعَ ٱلْعُسْرِ يُسْرًا","فَإِذَا فَرَغْتَ فَٱنصَبْ","وَإِلَىٰ رَبِّكَ فَٱرْغَب"],
+95:["وَٱلتِّينِ وَٱلزَّيْتُونِ","وَطُورِ سِينِينَ","وَهَٰذَا ٱلْبَلَدِ ٱلْأَمِينِ","لَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ فِىٓ أَحْسَنِ تَقْوِيمٍ","ثُمَّ رَدَدْنَٰهُ أَسْفَلَ سَٰفِلِينَ","إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍ","فَمَا يُكَذِّبُكَ بَعْدُ بِٱلدِّينِ","أَلَيْسَ ٱللَّهُ بِأَحْكَمِ ٱلْحَٰكِمِينَ"],
+96:["ٱقْرَأْ بِٱسْمِ رَبِّكَ ٱلَّذِى خَلَقَ","خَلَقَ ٱلْإِنسَٰنَ مِنْ عَلَقٍ","ٱقْرَأْ وَرَبُّكَ ٱلْأَكْرَمُ","ٱلَّذِى عَلَّمَ بِٱلْقَلَمِ","عَلَّمَ ٱلْإِنسَٰنَ مَا لَمْ يَعْلَمْ","كَلَّآ إِنَّ ٱلْإِنسَٰنَ لَيَطْغَىٰٓ","أَن رَّءَاهُ ٱسْتَغْنَىٰٓ","إِنَّ إِلَىٰ رَبِّكَ ٱلرُّجْعَىٰٓ","أَرَءَيْتَ ٱلَّذِى يَنْهَىٰ","عَبْدًا إِذَا صَلَّىٰٓ","أَرَءَيْتَ إِن كَانَ عَلَى ٱلْهُدَىٰٓ","أَوْ أَمَرَ بِٱلتَّقْوَىٰٓ","أَرَءَيْتَ إِن كَذَّبَ وَتَوَلَّىٰٓ","أَلَمْ يَعْلَم بِأَنَّ ٱللَّهَ يَرَىٰ","كَلَّا لَئِن لَّمْ يَنتَهِ لَنَسْفَعًا بِٱلنَّاصِيَةِ","نَاصِيَةٍ كَٰذِبَةٍ خَاطِئَةٍ","فَلْيَدْعُ نَادِيَهُۥ","سَنَدْعُ ٱلزَّبَانِيَةَ","كَلَّا لَا تُطِعْهُ وَٱسْجُدْ وَٱقْتَرِب"],
+97:["إِنَّآ أَنزَلْنَٰهُ فِى لَيْلَةِ ٱلْقَدْرِ","وَمَآ أَدْرَىٰكَ مَا لَيْلَةُ ٱلْقَدْرِ","لَيْلَةُ ٱلْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ","تَنَزَّلُ ٱلْمَلَٰٓئِكَةُ وَٱلرُّوحُ فِيهَا بِإِذْنِ رَبِّهِم مِّن كُلِّ أَمْرٍ","سَلَٰمٌ هِىَ حَتَّىٰ مَطْلَعِ ٱلْفَجْرِ"],
+98:["لَمْ يَكُنِ ٱلَّذِينَ كَفَرُوا۟ مِنْ أَهْلِ ٱلْكِتَٰبِ وَٱلْمُشْرِكِينَ مُنفَكِّينَ حَتَّىٰ تَأْتِيَهُمُ ٱلْبَيِّنَةُ","رَسُولٌ مِّنَ ٱللَّهِ يَتْلُوا۟ صُحُفًا مُّطَهَّرَةً","فِيهَا كُتُبٌ قَيِّمَةٌ","وَمَا تَفَرَّقَ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَٰبَ إِلَّا مِنۢ بَعْدِ مَا جَآءَتْهُمُ ٱلْبَيِّنَةُ","وَمَآ أُمِرُوٓا۟ إِلَّا لِيَعْبُدُوا۟ ٱللَّهَ مُخْلِصِينَ لَهُ ٱلدِّينَ حُنَفَآءَ وَيُقِيمُوا۟ ٱلصَّلَوٰةَ وَيُؤْتُوا۟ ٱلزَّكَوٰةَ ۚ وَذَٰلِكَ دِينُ ٱلْقَيِّمَةِ","إِنَّ ٱلَّذِينَ كَفَرُوا۟ مِنْ أَهْلِ ٱلْكِتَٰبِ وَٱلْمُشْرِكِينَ فِى نَارِ جَهَنَّمَ خَٰلِدِينَ فِيهَآ ۚ أُو۟لَٰئِكَ هُمْ شَرُّ ٱلْبَرِيَّةِ","إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ أُو۟لَٰئِكَ هُمْ خَيْرُ ٱلْبَرِيَّةِ","جَزَآؤُهُمْ عِندَ رَبِّهِمْ جَنَّٰتُ عَدْنٍ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ خَٰلِدِينَ فِيهَآ أَبَدًا ۖ رَّضِىَ ٱللَّهُ عَنْهُمْ وَرَضُوا۟ عَنْهُ ۚ ذَٰلِكَ لِمَنْ خَشِىَ رَبَّهُۥ"],
+99:["إِذَا زُلْزِلَتِ ٱلْأَرْضُ زِلْزَالَهَا","وَأَخْرَجَتِ ٱلْأَرْضُ أَثْقَالَهَا","وَقَالَ ٱلْإِنسَٰنُ مَا لَهَا","يَوْمَئِذٍ تُحَدِّثُ أَخْبَارَهَا","بِأَنَّ رَبَّكَ أَوْحَىٰ لَهَا","يَوْمَئِذٍ يَصْدُرُ ٱلنَّاسُ أَشْتَاتًا لِّيُرَوْا۟ أَعْمَٰلَهُمْ","فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُۥ","وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُۥ"],
+100:["وَٱلْعَٰدِيَٰتِ ضَبْحًا","فَٱلْمُورِيَٰتِ قَدْحًا","فَٱلْمُغِيرَٰتِ صُبْحًا","فَأَثَرْنَ بِهِۦ نَقْعًا","فَوَسَطْنَ بِهِۦ جَمْعًا","إِنَّ ٱلْإِنسَٰنَ لِرَبِّهِۦ لَكَنُودٌ","وَإِنَّهُۥ عَلَىٰ ذَٰلِكَ لَشَهِيدٌ","وَإِنَّهُۥ لِحُبِّ ٱلْخَيْرِ لَشَدِيدٌ","أَفَلَا يَعْلَمُ إِذَا بُعْثِرَ مَا فِى ٱلْقُبُورِ","وَحُصِّلَ مَا فِى ٱلصُّدُورِ","إِنَّ رَبَّهُم بِهِمْ يَوْمَئِذٍ لَّخَبِيرٌ"],
+101:["ٱلْقَارِعَةُ","مَا ٱلْقَارِعَةُ","وَمَآ أَدْرَىٰكَ مَا ٱلْقَارِعَةُ","يَوْمَ يَكُونُ ٱلنَّاسُ كَٱلْفَرَاشِ ٱلْمَبْثُوثِ","وَتَكُونُ ٱلْجِبَالُ كَٱلْعِهْنِ ٱلْمَنفُوشِ","فَأَمَّا مَن ثَقُلَتْ مَوَٰزِينُهُۥ","فَهُوَ فِى عِيشَةٍ رَّاضِيَةٍ","وَأَمَّا مَنْ خَفَّتْ مَوَٰزِينُهُۥ","فَأُمُّهُۥ هَاوِيَةٌ","وَمَآ أَدْرَىٰكَ مَا هِيَهْ","نَارٌ حَامِيَةٌ"],
+102:["أَلْهَىٰكُمُ ٱلتَّكَاثُرُ","حَتَّىٰ زُرْتُمُ ٱلْمَقَابِرَ","كَلَّا سَوْفَ تَعْلَمُونَ","ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ","كَلَّا لَوْ تَعْلَمُونَ عِلْمَ ٱلْيَقِينِ","لَتَرَوُنَّ ٱلْجَحِيمَ","ثُمَّ لَتَرَوُنَّهَا عَيْنَ ٱلْيَقِينِ","ثُمَّ لَتُسْـَٔلُنَّ يَوْمَئِذٍ عَنِ ٱلنَّعِيمِ"],
+103:["وَٱلْعَصْرِ","إِنَّ ٱلْإِنسَٰنَ لَفِى خُسْرٍ","إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ"],
+104:["وَيْلٌ لِّكُلِّ هُمَزَةٍ لُّمَزَةٍ","ٱلَّذِى جَمَعَ مَالًا وَعَدَّدَهُۥ","يَحْسَبُ أَنَّ مَالَهُۥٓ أَخْلَدَهُۥ","كَلَّا ۖ لَيُنۢبَذَنَّ فِى ٱلْحُطَمَةِ","وَمَآ أَدْرَىٰكَ مَا ٱلْحُطَمَةُ","نَارُ ٱللَّهِ ٱلْمُوقَدَةُ","ٱلَّتِى تَطَّلِعُ عَلَى ٱلْأَفْـِٔدَةِ","إِنَّهَا عَلَيْهِم مُّؤْصَدَةٌ","فِى عَمَدٍ مُّمَدَّدَةٍ"],
+105:["أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَٰبِ ٱلْفِيلِ","أَلَمْ يَجْعَلْ كَيْدَهُمْ فِى تَضْلِيلٍ","وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ","تَرْمِيهِم بِحِجَارَةٍ مِّن سِجِّيلٍ","فَجَعَلَهُمْ كَعَصْفٍ مَّأْكُولٍ"],
+106:["إِيلَٰفِهِمْ","إِۦلَٰفِهِمْ رِحْلَةَ ٱلشِّتَآءِ وَٱلصَّيْفِ","فَلْيَعْبُدُوا۟ رَبَّ هَٰذَا ٱلْبَيْتِ","ٱلَّذِىٓ أَطْعَمَهُم مِّن جُوعٍ وَءَامَنَهُم مِّنْ خَوْفٍ"],
+107:["أَرَءَيْتَ ٱلَّذِى يُكَذِّبُ بِٱلدِّينِ","فَذَٰلِكَ ٱلَّذِى يَدُعُّ ٱلْيَتِيمَ","وَلَا يَحُضُّ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ","فَوَيْلٌ لِّلْمُصَلِّينَ","ٱلَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ","ٱلَّذِينَ هُمْ يُرَآءُونَ","وَيَمْنَعُونَ ٱلْمَاعُونَ"],
+108:["إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ","فَصَلِّ لِرَبِّكَ وَٱنْحَرْ","إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ"],
+109:["قُلْ يَٰٓأَيُّهَا ٱلْكَٰفِرُونَ","لَآ أَعْبُدُ مَا تَعْبُدُونَ","وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ","وَلَآ أَنَا۠ عَابِدٌ مَّا عَبَدتُّمْ","وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ","لَكُمْ دِينُكُمْ وَلِىَ دِينِ"],
+110:["إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ","وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًا","فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ ۚ إِنَّهُۥ كَانَ تَوَّابًا"],
+111:["تَبَّتْ يَدَآ أَبِى لَهَبٍ وَتَبَّ","مَآ أَغْنَىٰ عَنْهُ مَالُهُۥ وَمَا كَسَبَ","سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ","وَٱمْرَأَتُهُۥ حَمَّالَةَ ٱلْحَطَبِ","فِى جِيدِهَا حَبْلٌ مِّن مَّسَدٍ"],
+112:["قُلْ هُوَ ٱللَّهُ أَحَدٌ","ٱللَّهُ ٱلصَّمَدُ","لَمْ يَلِدْ وَلَمْ يُولَدْ","وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌ"],
+113:["قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ","مِن شَرِّ مَا خَلَقَ","وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ","وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ","وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ"],
+114:["قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ","مَلِكِ ٱلنَّاسِ","إِلَٰهِ ٱلنَّاسِ","مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ","ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ","مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ"]
 };
-const BASMALA = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
-
-/* ---------- قرّاء ورش — آية بآية (everyayah) ---------- */
-const AY_REC = [
-  { rid:'yassin', name:'ياسين الجزائري', origin:'الجزائر 🇩🇿', folder:'warsh/warsh_yassin_al_jazaery_128kbps' },
-  { rid:'dosary', name:'إبراهيم الدوسري', origin:'السعودية', folder:'warsh/warsh_ibrahim_aldosary_128kbps' },
-  { rid:'basit',  name:'عبد الباسط عبد الصمد', origin:'مصر', folder:'warsh/warsh_Abdul_Baset_Abdus_Samad_128kbps' }
-];
-let MP3_REC = null; // تُجلب من mp3quran بفلتر «ورش» فقط
+const BASMALA = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
 
 /* ---------- الحالة ---------- */
-const LS_KEY = 'noorWarsh:v1';
+const LS_KEY = 'noorWarsh:v2';
 let S = {
   theme:'day', font:30, view:'flow', speed:1, repeat:false,
   lastRead:null, bookmarks:[], plan:[], reviews:{},
-  ayahRec:'yassin', surahRec:{ kind:'ay', id:'yassin' }, planFilter:'all'
+  ayahRec:'yassin', surahRec:{ kind:'ay', id:'yassin' }, planFilter:'all',
+  textSrc:null, probes:{}
 };
 try { const raw = localStorage.getItem(LS_KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (_) {}
 function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (_) {} }
-/* تنظيف آثار النسخة القديمة (حفص) مرة واحدة */
 try {
-  if (!localStorage.getItem('noorWarsh:purged')) {
-    Object.keys(localStorage).filter(k => /^noor(?!Warsh)/i.test(k)).forEach(k => localStorage.removeItem(k));
-    localStorage.setItem('noorWarsh:purged', '1');
+  if (!localStorage.getItem('noorWarsh:purged2')) {
+    Object.keys(localStorage).filter(k => /^noor/i.test(k) && k !== LS_KEY && k !== 'noorWarsh:purged2').forEach(k => localStorage.removeItem(k));
+    localStorage.setItem('noorWarsh:purged2', '1');
   }
 } catch (_) {}
 
-/* ---------- طبقة النص (ورش فقط) ---------- */
-const MEM = {};            // n -> [{n,t}]
-const NIDX = {};           // فهرس البحث المطبّع
-const DISC = { ed:'quran-warsh', tried:false };
-let FULL = false, fullPromise = null;
-const stripMarks = s => s.replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u06DD\u06DE\u08F0-\u08FF\u200B-\u200F\uFEFF]/g, '');
+/* ---------- التطبيع والبحث ---------- */
+const MEM = {}; const NIDX = {};
+for (const k in SEED) MEM[k] = SEED[k].map((t, i) => ({ n: i + 1, t })), MEM[k].seed = true;
 function normChar(ch) {
   if (/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u06DD\u06DE\u08F0-\u08FF\u200B-\u200F\uFEFF]/.test(ch)) return '';
   if ('أإآٱٲٳ'.includes(ch)) return 'ا';
@@ -539,97 +471,128 @@ function normChar(ch) {
 }
 const norm = s => { let o = ''; for (const ch of String(s)) { const n = normChar(ch); if (n === ' ' && o.endsWith(' ')) continue; o += n; } return o.trim(); };
 function normMap(s) { let o = '', map = []; for (let i = 0; i < s.length; i++) { const n = normChar(s[i]); if (!n) continue; if (n === ' ' && o.endsWith(' ')) continue; o += n; map.push(i); } return { o, map }; }
+const stripMarks = s => s.replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u06DD\u06DE\u08F0-\u08FF\u200B-\u200F\uFEFF]/g, '');
 
-function fetchT(url, ms = 10000) {
+/* ---------- فحص أصالة رواية ورش (يرفض حفص آليًا) ---------- */
+function warshScore(get) {
+  const t = (s, a) => { const v = get(s, a); return v ? norm(v) : null; };
+  const checks = [
+    [t(1,4),   v => v.startsWith('ملك يوم الدين')],
+    [t(21,4),  v => v.startsWith('قل رب احكم')],
+    [t(91,15), v => v.startsWith('فلا يخاف عقباها')],
+    [t(43,19), v => v.includes('عند الرحمن') && !v.includes('عباد الرحمن')]
+  ];
+  let pass = 0, fail = 0;
+  for (const [v, fn] of checks) { if (v == null) continue; fn(v) ? pass++ : fail++; }
+  return { pass, fail, ok: fail === 0 && pass >= 3 };
+}
+
+/* ---------- جلب النص الكامل مع التحقق ---------- */
+function fetchT(url, ms = 12000) {
   const c = new AbortController(); const t = setTimeout(() => c.abort(), ms);
   return fetch(url, { signal: c.signal }).finally(() => clearTimeout(t));
 }
 async function jget(url, ms) { try { const r = await fetchT(url, ms); if (!r.ok) return null; return await r.json(); } catch (_) { return null; } }
 
-function adoptSurah(data) { // alquran.cloud surah payload
-  const n = data.number;
-  let ayahs = data.ayahs.map(a => ({ n: a.numberInSurah, t: a.text }));
-  if (n !== 1 && n !== 9 && ayahs[0]) {
-    const w = ayahs[0].t.trim().split(/\s+/);
-    if (w.length > 4 && stripMarks(w[0]).startsWith('بسم')) {
-      MEM['bas' + n] = w.slice(0, 4).join(' ');
-      ayahs[0].t = w.slice(4).join(' ');
+function parseCloud(j) {
+  if (!(j && j.code === 200 && j.data && Array.isArray(j.data.surahs))) return null;
+  const out = {};
+  for (const s of j.data.surahs) out[s.number] = s.ayahs.map(a => ({ n: a.numberInSurah, t: a.text }));
+  return out;
+}
+function parseFawaz(j) {
+  if (!(j && Array.isArray(j.quran) && j.quran.length > 6000)) return null;
+  const out = {};
+  for (const v of j.quran) (out[v.chapter] = out[v.chapter] || []).push({ n: v.verse, t: v.text });
+  return out;
+}
+function validateSet(set) {
+  if (!set) return false;
+  const get = (s, a) => set[s] && set[s][a - 1] ? set[s][a - 1].t : null;
+  return warshScore(get).ok;
+}
+function adoptSet(set, srcLabel) {
+  for (const k in set) {
+    const n = +k; let arr = set[n];
+    if (n !== 1 && n !== 9 && arr[0]) {
+      const w = arr[0].t.trim().split(/\s+/);
+      if (w.length > 4 && stripMarks(w[0]).startsWith('بسم')) { MEM['bas' + n] = w.slice(0, 4).join(' '); arr[0].t = w.slice(4).join(' '); }
     }
+    MEM[n] = arr; delete NIDX[n];
   }
-  MEM[n] = ayahs; delete NIDX[n];
+  FULL = true; S.textSrc = srcLabel; save(); persistFull();
 }
-async function discoverEdition() {
-  if (DISC.tried) return false; DISC.tried = true;
-  const j = await jget('https://api.alquran.cloud/v1/edition?format=text&language=ar&type=quran', 9000);
-  const w = j && j.data && j.data.find(e => /warsh/i.test(e.identifier));
-  if (w) { DISC.ed = w.identifier; return true; }
-  return false;
-}
-async function jsWhole() {
-  const urls = [
-    'https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quran-warsh.json',
-    'https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-warsh.json',
-    'https://raw.githubusercontent.com/fawazahmed0/quran-api/1/editions/ara-quran-warsh.json'
-  ];
-  for (const u of urls) {
-    const j = await jget(u, 12000);
-    if (j && Array.isArray(j.quran) && j.quran.length > 6000) {
-      for (const v of j.quran) { (MEM[v.chapter] = MEM[v.chapter] || []).push({ n: v.verse, t: v.text }); }
-      for (const k in MEM) delete NIDX[k];
-      FULL = true; persistFull(); return true;
-    }
-  }
-  return false;
-}
-async function loadSurah(n) {
-  if (MEM[n]) return MEM[n];
-  let j = await jget(`https://api.alquran.cloud/v1/surah/${n}/${DISC.ed}`, 9000);
-  if (!(j && j.code === 200) && await discoverEdition())
-    j = await jget(`https://api.alquran.cloud/v1/surah/${n}/${DISC.ed}`, 9000);
-  if (j && j.code === 200) { adoptSurah(j.data); return MEM[n]; }
-  if (await jsWhole()) return MEM[n];
-  if (SEED[n]) { MEM[n] = SEED[n].map((t, i) => ({ n: i + 1, t })); MEM[n].seed = true; return MEM[n]; }
-  return null;
-}
+let FULL = false, fullPromise = null;
 async function persistFull() {
   try {
-    const c = await caches.open('noor-warsh-full-v1');
-    const slim = {}; for (const k in MEM) if (Array.isArray(MEM[k])) slim[k] = MEM[k];
-    await c.put('./__warsh-full', new Response(JSON.stringify(slim)));
+    const c = await caches.open('noor-warsh-full-v2');
+    const slim = {}; for (const k in MEM) if (Array.isArray(MEM[k]) && !MEM[k].seed) slim[k] = MEM[k];
+    await c.put('./__warsh-full', new Response(JSON.stringify({ src: S.textSrc, data: slim })));
   } catch (_) {}
 }
 async function restoreFull() {
   try {
-    const c = await caches.open('noor-warsh-full-v1');
+    const c = await caches.open('noor-warsh-full-v2');
     const r = await c.match('./__warsh-full'); if (!r) return false;
-    const slim = await r.json();
-    for (const k in slim) MEM[k] = slim[k];
-    FULL = Object.keys(slim).length >= 114; return FULL;
+    const pack = await r.json();
+    if (!pack || !pack.data) return false;
+    const get = (s, a) => pack.data[s] && pack.data[s][a - 1] ? pack.data[s][a - 1].t : null;
+    if (!warshScore(get).ok) { await c.delete('./__warsh-full'); return false; }
+    adoptSet(pack.data, pack.src || 'نسخة محفوظة'); return true;
   } catch (_) { return false; }
+}
+async function tryCloud() {
+  const ids = ['quran-warsh'];
+  const eds = await jget('https://api.alquran.cloud/v1/edition?format=text&language=ar&type=quran', 9000);
+  if (eds && Array.isArray(eds.data)) for (const e of eds.data) if (/warsh/i.test(e.identifier) && !ids.includes(e.identifier)) ids.push(e.identifier);
+  for (const id of ids) {
+    const set = parseCloud(await jget(`https://api.alquran.cloud/v1/quran/${id}`, 20000));
+    if (validateSet(set)) { adoptSet(set, 'alquran.cloud · ' + id); return true; }
+  }
+  return false;
+}
+async function tryFawaz() {
+  const slugs = ['ara-quran-warsh', 'ara-warsh'];
+  const ed = await jget('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions.min.json', 9000)
+          || await jget('https://raw.githubusercontent.com/fawazahmed0/quran-api/1/editions.min.json', 9000);
+  if (ed) for (const k in ed) if (/warsh/i.test(k) && !slugs.includes(k)) slugs.push(k);
+  for (const slug of slugs) {
+    const urls = [
+      `https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/${slug}.min.json`,
+      `https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/${slug}.json`,
+      `https://raw.githubusercontent.com/fawazahmed0/quran-api/1/editions/${slug}.json`
+    ];
+    for (const u of urls) {
+      const set = parseFawaz(await jget(u, 15000));
+      if (validateSet(set)) { adoptSet(set, 'jsDelivr · ' + slug); return true; }
+    }
+  }
+  return false;
 }
 function ensureFull() {
   if (FULL) return Promise.resolve(true);
   if (fullPromise) return fullPromise;
   fullPromise = (async () => {
     if (await restoreFull()) return true;
-    let j = await jget(`https://api.alquran.cloud/v1/quran/${DISC.ed}`, 20000);
-    if (!(j && j.code === 200) && await discoverEdition())
-      j = await jget(`https://api.alquran.cloud/v1/quran/${DISC.ed}`, 20000);
-    if (j && j.code === 200) {
-      j.data.surahs.forEach(adoptSurah); FULL = true; persistFull(); return true;
-    }
-    return await jsWhole();
+    if (await tryCloud()) return true;
+    if (await tryFawaz()) return true;
+    return false;
   })().finally(() => { fullPromise = null; });
   return fullPromise;
+}
+async function loadSurah(n) {
+  if (MEM[n] && !MEM[n].seed) return MEM[n];
+  if (MEM[n] && MEM[n].seed && FULL) return MEM[n];
+  if (MEM[n] && MEM[n].seed) { ensureFull().then(() => { if (ROUTE.name === 'read' && ROUTE.s === n) fillReader(0); }); return MEM[n]; }
+  const ok = await ensureFull();
+  return ok ? MEM[n] : null;
 }
 
 /* ---------- أدوات عرض ---------- */
 function rosette(n, em) {
   return `<span class="ros"${em ? ` style="--rs:${em}"` : ''} aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="9" y="9" width="22" height="22" rx="3"/><rect x="9" y="9" width="22" height="22" rx="3" transform="rotate(45 20 20)"/></svg><b>${arD(n)}</b></span>`;
 }
-function surahOptions(sel) {
-  return META.map(m => `<option value="${m.n}"${m.n === sel ? ' selected' : ''}>${arD(m.n)} · ${esc(m.name)}</option>`).join('');
-}
+function surahOptions(sel) { return META.map(m => `<option value="${m.n}"${m.n === sel ? ' selected' : ''}>${arD(m.n)} · ${esc(m.name)}</option>`).join(''); }
 function isBm(s, a) { return S.bookmarks.some(b => b.s === s && b.a === a); }
 function stats() {
   const today = dKey();
@@ -663,31 +626,115 @@ async function copyText(t, label) {
     ta.remove();
   }
 }
+function verifyChip() {
+  return FULL
+    ? `<span class="verify-chip">✓ نص ورش مُتحقَّق منه — رُفض أي نص مخالف لرواية ورش</span>`
+    : `<span class="verify-chip seed">نسخة ورش مضمّنة — جارٍ جلب المصحف الكامل</span>`;
+}
 
-/* ---------- المشغّل (ورش حصريًا) ---------- */
-const AU = el('au');
-let P = { on:false, mode:null, rec:null, s:1, a:1, seq:false, triedFallback:false };
+/* ---------- القرّاء: فحص حيّ قبل الاعتماد ---------- */
+const AY_HOSTS = ['https://everyayah.com/data/', 'https://www.everyayah.com/data/'];
+const AY_REC = [
+  { rid:'yassin', name:'ياسين الجزائري', origin:'الجزائر 🇩🇿', folders:['warsh/warsh_yassin_al_jazaery_128kbps'] },
+  { rid:'dosary', name:'إبراهيم الدوسري', origin:'السعودية', folders:['warsh/warsh_ibrahim_aldosary_128kbps'] },
+  { rid:'basit',  name:'عبد الباسط عبد الصمد', origin:'مصر', folders:['warsh/warsh_Abdul_Baset_Abdus_Samad_128kbps','warsh/warsh_abdul_baset_abdus_samad_128kbps'] },
+  { rid:'husary', name:'محمود خليل الحصري', origin:'مصر', folders:['warsh/warsh_Husary_128kbps','warsh/warsh_alhusary_128kbps','warsh/warsh_husary_128kbps'] },
+  { rid:'kareem', name:'محمد عبد الكريم', origin:'السعودية', folders:['warsh/warsh_Muhammad_Abdul_Kareem_128kbps','warsh/warsh_muhammad_abdulkareem_128kbps'] }
+];
+const MP3_FALLBACK = [
+  { name:'الدوكالي محمد العالم', origin:'ليبيا', servers:['https://server7.mp3quran.net/dokali/'] },
+  { name:'عبد الباسط عبد الصمد — ورش', origin:'مصر', servers:['https://server7.mp3quran.net/basit/Rewayat-Warsh-A-n-Nafi/','https://server7.mp3quran.net/basit_warsh/'] },
+  { name:'محمود خليل الحصري — ورش', origin:'مصر', servers:['https://server13.mp3quran.net/husr/Rewayat-Warsh-A-n-Nafi/','https://server13.mp3quran.net/husr_warsh/'] },
+  { name:'عبد الرشيد صوفي — ورش', origin:'الصومال', servers:['https://server16.mp3quran.net/soufi/Rewayat-Warsh-A-n-Nafi/'] }
+];
+let MP3_REC = null, probing = false;
+
+function probeAudio(url, ms = 9000) {
+  return new Promise(res => {
+    const a = new Audio(); a.preload = 'metadata';
+    let done = false;
+    const fin = v => { if (done) return; done = true; clearTimeout(t); a.removeAttribute('src'); res(v); };
+    const t = setTimeout(() => fin(false), ms);
+    a.addEventListener('loadedmetadata', () => fin(true), { once:true });
+    a.addEventListener('error', () => fin(false), { once:true });
+    a.src = url;
+  });
+}
+function probeGet(rid) {
+  const p = S.probes[rid];
+  if (p && Date.now() - p.ts < 12 * 3600e3) return p;
+  return null;
+}
+function probeSet(rid, ok, base) { S.probes[rid] = { ok, base, ts: Date.now() }; save(); }
+async function probeAyRec(r) {
+  const cached = probeGet(r.rid); if (cached) return cached;
+  for (const host of AY_HOSTS) for (const folder of r.folders) {
+    const base = host + folder + '/';
+    if (await probeAudio(base + '001001.mp3')) { const p = { ok:true, base, ts:Date.now() }; probeSet(r.rid, true, base); return p; }
+  }
+  probeSet(r.rid, false, null); return { ok:false };
+}
+async function probeMp3(r) {
+  const cached = probeGet(r.rid); if (cached) return cached;
+  for (const server of r.servers) {
+    if (await probeAudio(server + '001.mp3')) { probeSet(r.rid, true, server); return { ok:true, base:server }; }
+  }
+  probeSet(r.rid, false, null); return { ok:false };
+}
+function ayBase(r) { const p = probeGet(r.rid); return p && p.ok ? p.base : AY_HOSTS[0] + r.folders[0] + '/'; }
 const ayRec = () => AY_REC.find(r => r.rid === S.ayahRec) || AY_REC[0];
 function surahRec() {
   if (S.surahRec.kind === 'mp3' && MP3_REC) { const r = MP3_REC.find(x => x.rid === S.surahRec.id); if (r) return r; }
   return AY_REC.find(r => r.rid === S.surahRec.id) || ayRec();
 }
-const aySrc = (rec, s, a) => `https://everyayah.com/data/${rec.folder}/${pad3(s)}${pad3(a)}.mp3`;
-function setPlayerSize() {
-  document.documentElement.style.setProperty('--playerH', P.on ? el('player').offsetHeight + 'px' : '0px');
+async function ensureReciters() {
+  if (probing) return; probing = true;
+  try {
+    if (!MP3_REC) {
+      let list = [];
+      const j = await jget('https://mp3quran.net/api/v3/reciters?language=ar', 12000)
+             || await jget('https://www.mp3quran.net/api/v3/reciters?language=ar', 12000);
+      if (j && Array.isArray(j.reciters)) {
+        for (const r of j.reciters) for (const m of (r.moshaf || [])) {
+          if (/ورش/.test(m.name)) {
+            let server = String(m.server || ''); if (!server.endsWith('/')) server += '/';
+            list.push({ rid:'m' + m.id, name:r.name, sub:m.name, origin:'', servers:[server],
+              surahs:String(m.surah_list || '').split(',').map(Number).filter(Boolean) });
+          }
+        }
+      }
+      MP3_FALLBACK.forEach((f, i) => {
+        if (!list.some(x => x.servers[0] === f.servers[0]))
+          list.push({ rid:'f' + i, name:f.name, sub:'ورش عن نافع', origin:f.origin, servers:f.servers, surahs:null });
+      });
+      const maghrebFirst = r => /الجزائري|الدوكالي|قنيوة|العالم/.test(r.name) ? 0 : 1;
+      list.sort((a, b) => maghrebFirst(a) - maghrebFirst(b) || a.name.localeCompare(b.name, 'ar'));
+      MP3_REC = list;
+    }
+    await Promise.all(AY_REC.map(probeAyRec));
+    await Promise.all(MP3_REC.map(probeMp3));
+    const ayOk = AY_REC.find(r => probeGet(r.rid) && probeGet(r.rid).ok);
+    if (ayOk && (!probeGet(S.ayahRec) || !probeGet(S.ayahRec).ok)) { S.ayahRec = ayOk.rid; save(); }
+    if (S.surahRec.kind === 'ay') {
+      const cur = AY_REC.find(r => r.rid === S.surahRec.id);
+      if ((!cur || !probeGet(cur.rid) || !probeGet(cur.rid).ok) && ayOk) { S.surahRec = { kind:'ay', id:ayOk.rid }; save(); }
+    }
+  } finally { probing = false; }
+  if (ROUTE.name === 'audio') render();
 }
-function showPlayer() {
-  P.on = true; document.body.classList.add('player-on');
-  requestAnimationFrame(setPlayerSize);
-  updatePlayerUI(); updateMediaSession();
-}
+
+/* ---------- المشغّل ---------- */
+const AU = el('au');
+let P = { on:false, mode:null, rec:null, s:1, a:1, seq:false, fallbacks:0 };
+const aySrc = (rec, s, a) => ayBase(rec) + pad3(s) + pad3(a) + '.mp3';
+function setPlayerSize() { document.documentElement.style.setProperty('--playerH', P.on ? el('player').offsetHeight + 'px' : '0px'); }
+function showPlayer() { P.on = true; document.body.classList.add('player-on'); requestAnimationFrame(setPlayerSize); updatePlayerUI(); updateMediaSession(); }
 function updatePlayerUI() {
   if (!P.on) return;
   const m = SURA(P.s);
   el('pTitle').textContent = P.mode === 'surah' ? `${m.name} · تلاوة كاملة` : `${m.name} · الآية ${arD(P.a)}`;
   el('pSub').textContent = `${P.rec.name} — ورش عن نافع`;
   el('pRepeat').classList.toggle('on', S.repeat);
-  el('pPrev').style.visibility = el('pNext').style.visibility = 'visible';
   document.querySelectorAll('#pSpeeds button').forEach(b => b.classList.toggle('on', parseFloat(b.dataset.v) === S.speed));
 }
 function updatePlayIcon() {
@@ -700,26 +747,21 @@ function updateMediaSession() {
   try {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: el('pTitle').textContent, artist: P.rec.name + ' — ورش عن نافع', album: 'نُور المُصحف',
-      artwork: [{ src: 'icon.svg', sizes: '512x512', type: 'image/svg+xml' }]
+      artwork: [{ src:'icon.svg', sizes:'512x512', type:'image/svg+xml' }]
     });
   } catch (_) {}
 }
-function startAudio(src) {
-  AU.src = src; AU.playbackRate = S.speed;
-  AU.play().catch(() => toast('اضغط زر التشغيل لبدء التلاوة ▶'));
-  showPlayer(); markPlaying();
-}
-function playAyah(s, a, seq) {
-  P = { on:true, mode:'ayah', rec:ayRec(), s, a, seq:!!seq, triedFallback:false };
-  startAudio(aySrc(P.rec, s, a));
-}
+function startAudio(src) { AU.src = src; AU.playbackRate = S.speed; AU.play().catch(() => toast('اضغط زر التشغيل لبدء التلاوة ▶')); showPlayer(); markPlaying(); }
+function playAyah(s, a, seq) { P = { on:true, mode:'ayah', rec:ayRec(), s, a, seq:!!seq, fallbacks:0 }; startAudio(aySrc(P.rec, s, a)); }
 function playSurah(rec, s) {
-  if (rec.server) {
+  if (rec.servers) {
     if (rec.surahs && !rec.surahs.includes(s)) { toast('هذه السورة غير متوفرة لدى هذا القارئ — جرّب سورة أو قارئًا آخر'); return; }
-    P = { on:true, mode:'surah', rec, s, a:1, seq:false, triedFallback:false };
-    startAudio(rec.server + pad3(s) + '.mp3');
+    const p = probeGet(rec.rid);
+    const server = p && p.ok ? p.base : rec.servers[0];
+    P = { on:true, mode:'surah', rec, s, a:1, seq:false, fallbacks:0 };
+    startAudio(server + pad3(s) + '.mp3');
   } else {
-    P = { on:true, mode:'ayah', rec, s, a:1, seq:true, triedFallback:false };
+    P = { on:true, mode:'ayah', rec, s, a:1, seq:true, fallbacks:0 };
     startAudio(aySrc(rec, s, 1));
     toast('تلاوة متصلة آية بآية — ' + rec.name);
   }
@@ -734,9 +776,8 @@ const fmtT = t => isFinite(t) ? Math.floor(t / 60) + ':' + String(Math.floor(t %
 AU.addEventListener('timeupdate', () => {
   const d = AU.duration || 0, c = AU.currentTime || 0;
   el('pCur').textContent = fmtT(c); el('pDur').textContent = fmtT(d);
-  const f = d ? (c / d) * 100 : 0;
   el('pSeek').value = d ? Math.round((c / d) * 1000) : 0;
-  el('pSeek').style.setProperty('--fill', f + '%');
+  el('pSeek').style.setProperty('--fill', (d ? (c / d) * 100 : 0) + '%');
 });
 AU.addEventListener('loadedmetadata', () => {
   AU.playbackRate = S.speed;
@@ -747,18 +788,20 @@ AU.addEventListener('pause', updatePlayIcon);
 AU.addEventListener('ended', () => {
   if (S.repeat) { AU.currentTime = 0; AU.play().catch(() => {}); return; }
   if (P.mode === 'ayah') {
-    const cnt = SURA(P.s).ayahs;
-    if (P.a < cnt) { playAyah(P.s, P.a + 1, P.seq); return; }
+    if (P.a < SURA(P.s).ayahs) { playAyah(P.s, P.a + 1, P.seq); return; }
     toast('تمّت تلاوة سورة ' + SURA(P.s).name + ' ✦');
   }
   updatePlayIcon();
 });
 AU.addEventListener('error', () => {
-  if (!P.on || !AU.src) return;
-  if (P.mode === 'surah' && P.rec.server && !P.triedFallback) {
-    P.triedFallback = true;
-    toast('تعذّر تحميل الملف — التحويل إلى التلاوة المتصلة آية بآية');
-    playSurah(ayRec(), P.s); return;
+  if (!P.on || !AU.src || P.fallbacks > 3) { updatePlayIcon(); return; }
+  P.fallbacks++;
+  if (P.mode === 'surah') {
+    const alt = AY_REC.find(r => { const p = probeGet(r.rid); return p && p.ok; });
+    if (alt) { toast('تعذّر تشغيل الملف — التحويل إلى التلاوة المتصلة: ' + alt.name); playSurah(alt, P.s); return; }
+  } else {
+    const alt = AY_REC.find(r => r.rid !== P.rec.rid && probeGet(r.rid) && probeGet(r.rid).ok);
+    if (alt) { S.ayahRec = alt.rid; save(); toast('تعذّر المصدر — التحويل إلى ' + alt.name); playAyah(P.s, P.a, P.seq); return; }
   }
   toast('تعذّر تحميل التلاوة — تحقّق من الاتصال أو جرّب قارئًا آخر');
   updatePlayIcon();
@@ -773,13 +816,8 @@ if ('mediaSession' in navigator) {
 }
 function playerStep(dir) {
   if (!P.on) return;
-  if (P.mode === 'ayah') {
-    const na = clamp(P.a + dir, 1, SURA(P.s).ayahs);
-    if (na !== P.a) playAyah(P.s, na, P.seq);
-  } else {
-    const ns = clamp(P.s + dir, 1, 114);
-    if (ns !== P.s) playSurah(P.rec, ns);
-  }
+  if (P.mode === 'ayah') { const na = clamp(P.a + dir, 1, SURA(P.s).ayahs); if (na !== P.a) playAyah(P.s, na, P.seq); }
+  else { const ns = clamp(P.s + dir, 1, 114); if (ns !== P.s) playSurah(P.rec, ns); }
 }
 
 /* ---------- التوجيه ---------- */
@@ -808,7 +846,7 @@ function render() {
 }
 window.addEventListener('hashchange', render);
 
-/* ---------- عرض: الرئيسية ---------- */
+/* ---------- الرئيسية ---------- */
 function vHome() {
   const lr = S.lastRead;
   const cont = lr
@@ -824,6 +862,7 @@ function vHome() {
     <p class="basmala">${BASMALA}</p>
     <p class="tagline">اقرأ ورتّل وتدبّر</p>
     <p class="riwaya">مصحف المدينة النبوية — برواية <b>ورش عن نافع</b></p>
+    ${verifyChip()}
   </div>
   ${statsHTML()}
   <div class="home-grid reveal">
@@ -854,13 +893,17 @@ function vHome() {
 async function fillAyahDay() {
   const box = el('ayahDayBox'); if (!box) return;
   const idx = (Math.floor(Date.now() / 864e5) * 7919) % TOTAL;
-  const { s, a } = globalToSA(idx);
+  let { s, a } = globalToSA(idx);
+  if (!MEM[s]) {
+    const pool = Object.keys(MEM).map(Number).sort((x, y) => x - y);
+    if (!pool.length) return;
+    s = pool[idx % pool.length]; a = (idx % MEM[s].length) + 1;
+  }
   const arr = await loadSurah(s);
   if (!el('ayahDayBox')) return;
   if (!arr) { el('ayahDayBox').innerHTML = `<p class="muted">تعذّر تحميل آية اليوم — تحقّق من الاتصال.</p>`; return; }
-  const t = arr[a - 1].t;
   el('ayahDayBox').innerHTML = `
-    <p class="ayahday-text">${esc(t)} ${rosette(a, '1.1em')}</p>
+    <p class="ayahday-text">${esc(arr[a - 1].t)} ${rosette(a, '1.1em')}</p>
     <p class="ayahday-ref">سورة ${esc(SURA(s).name)} · الآية ${arD(a)}</p>
     <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
       <a class="btn btn-sm" href="#/read/${s}/${a}">اقرأ في المصحف ←</a>
@@ -868,7 +911,7 @@ async function fillAyahDay() {
     </div>`;
 }
 
-/* ---------- عرض: القارئ ---------- */
+/* ---------- القارئ ---------- */
 function vRead() {
   const m = SURA(ROUTE.s);
   return `
@@ -889,9 +932,10 @@ function vRead() {
   </div>
   <div class="surah-frame reveal"><span class="sf-orn">❁</span><h2 class="sf-name">سُورَةُ ${esc(m.name)}</h2><span class="sf-orn">❁</span></div>
   <p class="sf-meta">${m.type} · ${arD(m.ayahs)} آية · ترتيبها ${arD(m.n)} · الجزء ${arD(juzOf(m.n))} — الحزب ${arD(juzOf(m.n) * 2 - 1)}–${arD(juzOf(m.n) * 2)}</p>
+  <p class="sf-meta">${verifyChip()}</p>
   ${REVIEW && REVIEW.s === ROUTE.s ? `<div class="range-chip">🗓 مراجعة: الآيات ${arD(REVIEW.from)}–${arD(REVIEW.to)} <button data-action="range-clear" aria-label="إنهاء وضع المراجعة">✕</button></div>` : ''}
   <div id="basmalaHost">${ROUTE.s !== 1 && ROUTE.s !== 9 ? `<p class="basmala-line">${esc(MEM['bas' + ROUTE.s] || BASMALA)}</p>` : ''}</div>
-  <div id="ayahs"><div class="card"><div class="skel" style="height:26px;margin-bottom:12px"></div><div class="skel" style="height:26px;margin-bottom:12px"></div><div class="skel" style="height:26px;width:70%"></div></div></div>
+  <div id="ayahs"><div class="card"><p class="muted" style="margin-bottom:10px">جارٍ تحميل مصحف ورش الكامل (مرة واحدة فقط)…</p><div class="skel" style="height:26px;margin-bottom:12px"></div><div class="skel" style="height:26px;margin-bottom:12px"></div><div class="skel" style="height:26px;width:70%"></div></div></div>
   <div class="reader-bottom">
     <button class="btn" data-action="prev-surah"${ROUTE.s === 1 ? ' disabled' : ''}>‹ السورة السابقة</button>
     <button class="btn" data-action="next-surah"${ROUTE.s === 114 ? ' disabled' : ''}>السورة التالية ›</button>
@@ -919,15 +963,16 @@ function ayahHTML(s) {
 }
 async function fillReader(scrollTo) {
   const s = ROUTE.s;
-  const host = el('ayahs'); if (!host) return;
-  let arr = MEM[s];
-  if (!arr) { arr = await loadSurah(s); if (ROUTE.s !== s || !el('ayahs')) return; }
+  if (!el('ayahs')) return;
+  let arr = MEM[s] && !MEM[s].seed ? MEM[s] : null;
+  if (!arr) arr = await loadSurah(s);
+  if (ROUTE.s !== s || !el('ayahs')) return;
   if (!arr) {
-    el('ayahs').innerHTML = `<div class="card empty"><i>📖</i>هذه السورة غير محمّلة بعد.<br>اتصل بالإنترنت مرة واحدة لتُحفظ تلقائيًا للقراءة دون اتصال.<br><br><button class="btn btn-gold" data-action="retry-surah">إعادة المحاولة</button></div>`;
+    el('ayahs').innerHTML = `<div class="card empty"><i>📖</i>هذه السورة غير محمّلة بعد.<br>اتصل بالإنترنت مرة واحدة ليُجلب مصحف ورش الكامل ويُحفظ تلقائيًا.<br><br><button class="btn btn-gold" data-action="retry-surah">إعادة المحاولة</button></div>`;
     return;
   }
   const y = window.scrollY;
-  el('ayahs').innerHTML = ayahHTML(s) + (arr.seed ? `<div class="notice" style="margin-top:12px">نسخة احتياطية مضمّنة — اتصل بالإنترنت لجلب النص الكامل من المصدر <button class="btn btn-sm" data-action="retry-surah">تحديث</button></div>` : '');
+  el('ayahs').innerHTML = ayahHTML(s) + (arr.seed ? `<div class="notice" style="margin-top:12px">نسخة ورش مضمّنة — جارٍ جلب النص الكامل من المصدر <button class="btn btn-sm" data-action="retry-surah">تحديث</button></div>` : '');
   if (MEM['bas' + s] && el('basmalaHost')) el('basmalaHost').innerHTML = `<p class="basmala-line">${esc(MEM['bas' + s])}</p>`;
   if (scrollTo) window.scrollTo(0, y);
   attachAyahIO(s);
@@ -942,7 +987,7 @@ function attachAyahIO(s) {
   ayahIO = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (en.isIntersecting) {
-        const a = parseInt(en.target.dataset.a || (en.target.id || '').split('-')[2], 10);
+        const a = parseInt(en.target.dataset.a, 10);
         if (a && !lastReadTimer) {
           lastReadTimer = setTimeout(() => {
             lastReadTimer = null;
@@ -955,7 +1000,7 @@ function attachAyahIO(s) {
   document.querySelectorAll('#ayahs .ayah, #ayahs .ayah-card').forEach(n => ayahIO.observe(n));
 }
 
-/* ---------- عرض: الفهرس ---------- */
+/* ---------- الفهرس ---------- */
 function vIndex() {
   const tab = ROUTE.tab;
   let body = '';
@@ -996,7 +1041,7 @@ function surahRows(list) {
     </a>`).join('') || `<div class="card empty"><i>❁</i>لا توجد سورة بهذا الاسم.</div>`;
 }
 
-/* ---------- عرض: البحث ---------- */
+/* ---------- البحث ---------- */
 let searchQ = '';
 function vSearch() {
   return `<h2 class="sec" style="margin-top:4px">البحث في المصحف</h2>
@@ -1044,58 +1089,41 @@ function renderSearch() {
   box.innerHTML = count ? out.join('') : `<div class="card empty"><i>❁</i>لا توجد نتائج لـ «${esc(searchQ)}».</div>`;
 }
 
-/* ---------- عرض: التلاوات ---------- */
+/* ---------- التلاوات ---------- */
 function vAudio() {
   const selS = P.on ? P.s : (S.lastRead ? S.lastRead.s : 1);
+  const ayReady = AY_REC.filter(r => { const p = probeGet(r.rid); return p && p.ok; });
+  const ayPending = AY_REC.some(r => !probeGet(r.rid));
+  const mp3Ready = (MP3_REC || []).filter(r => { const p = probeGet(r.rid); return p && p.ok; });
   return `<h2 class="sec" style="margin-top:4px">التلاوات والقرّاء</h2>
-  <p class="muted">جميع التلاوات برواية <b style="color:var(--red)">ورش عن نافع</b> حصرًا — سورة كاملة أو آية بآية.</p>
+  <p class="muted">جميع التلاوات برواية <b style="color:var(--red)">ورش عن نافع</b> حصرًا — ولا يظهر هنا إلا قارئ اجتاز فحص التشغيل الفعلي.</p>
   <div class="mushaf-row" style="margin:14px 0">
     <label for="audioSurah">السورة</label>
     <select id="audioSurah">${surahOptions(selS)}</select>
     <span class="muted">ثم اضغط «تشغيل السورة» لدى القارئ المطلوب</span>
+    <button class="btn btn-sm" data-action="rec-retry">⟳ إعادة فحص القرّاء</button>
   </div>
   <h2 class="sec">قرّاء التلاوة المتصلة — آية بآية</h2>
-  <div class="rec-grid">${AY_REC.map(r => recCard(r, false)).join('')}</div>
+  ${ayPending && !ayReady.length ? '<div class="notice">جارٍ فحص توفر القرّاء… <span class="skel" style="width:120px;height:14px;display:inline-block"></span></div>' : ''}
+  ${ayReady.length ? `<div class="rec-grid">${ayReady.map(r => recCard(r, false)).join('')}</div>` : (!ayPending ? '<div class="card empty"><i>🎧</i>تعذّر الوصول إلى مصادر التلاوة المتصلة الآن — تحقّق من الاتصال ثم أعد الفحص.</div>' : '')}
   <h2 class="sec">قرّاء السور الكاملة</h2>
-  <div id="mp3Recs">${MP3_REC ? mp3Cards() : `<div class="card"><div class="skel" style="height:22px;margin-bottom:10px"></div><div class="skel" style="height:22px;width:55%"></div></div>`}</div>
-  <p class="muted" style="margin-top:16px;text-align:center">مصادر التلاوة: everyayah.com و mp3quran.net — مصفّاة برواية ورش فقط.</p>`;
+  <div id="mp3Recs">${MP3_REC === null ? '<div class="notice">جارٍ جلب قائمة قرّاء ورش وفحص سيرفراتهم… <span class="skel" style="width:120px;height:14px;display:inline-block"></span></div>' : (mp3Ready.length ? `<div class="rec-grid">${mp3Ready.map(r => recCard(r, true)).join('')}</div>` : '<div class="card empty"><i>🎧</i>لا يوجد قارئ سور كاملة متاح الآن — قرّاء التلاوة المتصلة أعلاه يعملون.</div>')}</div>
+  <p class="muted" style="margin-top:16px;text-align:center">مصادر التلاوة: everyayah.com و mp3quran.net — ورش فقط، مع فحص حيّ لكل مصدر.</p>`;
 }
 function recCard(r, isMp3) {
   const activeSur = S.surahRec.kind === (isMp3 ? 'mp3' : 'ay') && S.surahRec.id === r.rid;
   const activeAy = !isMp3 && S.ayahRec === r.rid;
   return `<div class="rec-card${activeSur ? ' active' : ''}">
-    <div class="rn">${esc(r.name)} ${r.origin && r.origin.includes('الجزائر') ? '<span class="badge dz">🇩🇿 قارئ من الجزائر</span>' : ''}</div>
-    <div class="rs">${esc(isMp3 ? r.sub : (r.origin || ''))} · ورش عن نافع${isMp3 && r.surahs ? ` · ${arD(r.surahs.length)} سورة` : ''}</div>
+    <div class="rn">${esc(r.name)} ${r.origin && r.origin.includes('الجزائر') ? '<span class="badge dz">🇩🇿 قارئ من الجزائر</span>' : ''} <span class="badge okb">✓ مجرَّب</span></div>
+    <div class="rs">${esc(isMp3 ? (r.sub || 'ورش عن نافع') : (r.origin || ''))} · ورش عن نافع${isMp3 && r.surahs ? ` · ${arD(r.surahs.length)} سورة` : ''}</div>
     <div class="ra">
       <button class="btn btn-sm btn-gold" data-action="rec-play" data-kind="${isMp3 ? 'mp3' : 'ay'}" data-rid="${esc(r.rid)}">▶ تشغيل السورة</button>
       ${!isMp3 ? `<button class="btn btn-sm${activeAy ? ' btn-green' : ''}" data-action="rec-ay-default" data-rid="${esc(r.rid)}">${activeAy ? '✓ معتمد للآيات' : 'اعتمد للآيات'}</button>` : ''}
     </div>
   </div>`;
 }
-function mp3Cards() {
-  if (!MP3_REC || !MP3_REC.length) return `<div class="card empty"><i>🎧</i>تعذّر جلب قائمة القرّاء الإضافية.<br>قرّاء التلاوة المتصلة أعلاه متاحون دائمًا.<br><br><button class="btn btn-gold" data-action="rec-retry">إعادة المحاولة</button></div>`;
-  return `<div class="rec-grid">${MP3_REC.map(r => recCard(r, true)).join('')}</div>`;
-}
-async function ensureReciters() {
-  if (MP3_REC) return;
-  const j = await jget('https://mp3quran.net/api/v3/reciters?language=ar', 12000);
-  let list = [];
-  if (j && Array.isArray(j.reciters)) {
-    for (const r of j.reciters) for (const m of (r.moshaf || [])) {
-      if (/ورش/.test(m.name)) {
-        let server = String(m.server || ''); if (!server.endsWith('/')) server += '/';
-        list.push({ rid:'m' + m.id, name:r.name, sub:m.name, server,
-          surahs:String(m.surah_list || '').split(',').map(Number).filter(Boolean) });
-      }
-    }
-    const maghrebFirst = r => /الجزائري|الدوكالي|قنيوة|العالم/.test(r.name) ? 0 : 1;
-    list.sort((a, b) => maghrebFirst(a) - maghrebFirst(b) || a.name.localeCompare(b.name, 'ar'));
-  }
-  MP3_REC = list;
-  const host = el('mp3Recs'); if (host) host.innerHTML = mp3Cards();
-}
 
-/* ---------- عرض: الحفظ والمراجعة ---------- */
+/* ---------- الحفظ ---------- */
 let editingId = null;
 const INTERVALS = [1, 3, 7, 14, 30];
 function dueBadge(p) {
@@ -1161,13 +1189,11 @@ function postRender() {
   if (r.name === 'read') fillReader(r.a || 0);
   if (r.name === 'search') {
     renderSearch();
-    ensureFull().then(() => { if (ROUTE.name === 'search') renderSearch(); });
+    ensureFull().then(ok => { if (ok && ROUTE.name === 'search') renderSearch(); });
     setTimeout(() => { const i = el('searchInput'); if (i) i.focus(); }, 60);
   }
   if (r.name === 'audio') ensureReciters();
-  document.querySelectorAll('.io-reveal').forEach(n => revealIO.observe(n));
 }
-const revealIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); } }), { threshold:.08 });
 
 /* ---------- شريط الآية ---------- */
 function openAyahBar(s, a) {
@@ -1188,8 +1214,6 @@ function closeAyahBar() {
   SELECTED = null; el('ayahBar').classList.remove('on');
   document.querySelectorAll('.ayah.selected,.ayah-card.selected').forEach(x => x.classList.remove('selected'));
 }
-
-/* ---------- العلامات ---------- */
 function toggleBm(s, a) {
   const i = S.bookmarks.findIndex(b => b.s === s && b.a === a);
   if (i >= 0) {
@@ -1207,7 +1231,7 @@ function toggleBm(s, a) {
 /* ---------- الطباعة / PDF ---------- */
 async function printSurah(s) {
   toast('جارٍ تجهيز ملف الطباعة…');
-  const arr = MEM[s] || await loadSurah(s);
+  const arr = MEM[s] && !MEM[s].seed ? MEM[s] : await loadSurah(s);
   if (!arr) { toast('تعذّر تجهيز السورة — تحقّق من الاتصال'); return; }
   const m = SURA(s);
   el('printArea').innerHTML = `
@@ -1220,40 +1244,30 @@ async function printSurah(s) {
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(() => window.print(), 120));
 }
 
-/* ---------- الأحداث (تفويض موحّد) ---------- */
+/* ---------- الأحداث ---------- */
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-action]');
   if (!t) return;
   const act = t.dataset.action;
   const s = parseNum(t.dataset.s), a = parseNum(t.dataset.a);
   switch (act) {
-    case 'theme': {
-      S.theme = S.theme === 'day' ? 'night' : 'day'; save(); applyTheme();
-      break;
-    }
-    case 'install': {
+    case 'theme': S.theme = S.theme === 'day' ? 'night' : 'day'; save(); applyTheme(); break;
+    case 'install':
       if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.finally(() => { deferredPrompt = null; el('installBtn').style.display = 'none'; }); }
       break;
-    }
     case 'back': go(PREV_ROUTE && PREV_ROUTE.name !== 'read' ? '#/' + PREV_ROUTE.name : '#/home'); break;
     case 'home-read': go('#/read/' + (parseNum(el('homeJump').value) || 1)); break;
     case 'home-pdf': printSurah(parseNum(el('homeJump').value) || 1); break;
-    case 'copy-day': {
-      const arr = MEM[s]; if (arr) copyText(arr[a - 1].t + `\n﴿${SURA(s).name}: ${arD(a)}﴾ — رواية ورش عن نافع`, 'آية اليوم');
-      break;
-    }
+    case 'copy-day': { const arr = MEM[s]; if (arr) copyText(arr[a - 1].t + `\n﴿${SURA(s).name}: ${arD(a)}﴾ — رواية ورش عن نافع`, 'آية اليوم'); break; }
     case 'prev-surah': if (ROUTE.s > 1) go('#/read/' + (ROUTE.s - 1)); break;
     case 'next-surah': if (ROUTE.s < 114) go('#/read/' + (ROUTE.s + 1)); break;
     case 'toggle-view': S.view = S.view === 'cards' ? 'flow' : 'cards'; save(); render(); break;
     case 'font-inc': S.font = clamp(S.font + 2, 20, 46); save(); applyFont(); break;
     case 'font-dec': S.font = clamp(S.font - 2, 20, 46); save(); applyFont(); break;
     case 'play-surah': playSurah(surahRec(), ROUTE.s); break;
-    case 'bookmark-here': {
-      const ay = SELECTED ? SELECTED.a : (S.lastRead && S.lastRead.s === ROUTE.s ? S.lastRead.a : 1);
-      toggleBm(ROUTE.s, ay); break;
-    }
+    case 'bookmark-here': { const ay = SELECTED ? SELECTED.a : (S.lastRead && S.lastRead.s === ROUTE.s ? S.lastRead.a : 1); toggleBm(ROUTE.s, ay); break; }
     case 'print-surah': printSurah(ROUTE.s); break;
-    case 'retry-surah': delete MEM[ROUTE.s]; fillReader(ROUTE.a || 0); break;
+    case 'retry-surah': ensureFull().then(() => { if (ROUTE.name === 'read') fillReader(ROUTE.a || 0); }); break;
     case 'ayah-select': openAyahBar(s, a); break;
     case 'ayah-play': playAyah(s, a, false); break;
     case 'ayah-bm': toggleBm(s, a); break;
@@ -1270,17 +1284,14 @@ document.addEventListener('click', e => {
       if (!rec) break;
       S.surahRec = { kind, id: rid }; save();
       playSurah(rec, selS);
-      if (ROUTE.name === 'audio') el('view').querySelectorAll('.rec-card').forEach(c => c.classList.remove('active')), t.closest('.rec-card').classList.add('active');
+      document.querySelectorAll('.rec-card').forEach(c => c.classList.remove('active'));
+      t.closest('.rec-card').classList.add('active');
       break;
     }
     case 'rec-ay-default': S.ayahRec = t.dataset.rid; save(); toast('اعتُمد ' + AY_REC.find(r => r.rid === S.ayahRec).name + ' لتلاوة الآيات ✓'); render(); break;
-    case 'rec-retry': MP3_REC = null; el('mp3Recs').innerHTML = '<div class="card"><div class="skel" style="height:22px"></div></div>'; ensureReciters(); break;
+    case 'rec-retry': S.probes = {}; MP3_REC = null; save(); render(); ensureReciters(); break;
     case 'plan-filter': S.planFilter = t.dataset.f; save(); render(); break;
-    case 'plan-open': {
-      const p = S.plan.find(x => x.id === t.dataset.id); if (!p) break;
-      REVIEW = { s: p.s, from: p.from, to: p.to };
-      go('#/read/' + p.s + '/' + p.from); break;
-    }
+    case 'plan-open': { const p = S.plan.find(x => x.id === t.dataset.id); if (!p) break; REVIEW = { s: p.s, from: p.from, to: p.to }; go('#/read/' + p.s + '/' + p.from); break; }
     case 'plan-done': {
       const p = S.plan.find(x => x.id === t.dataset.id); if (!p) break;
       p.stage = Math.min(p.stage + 1, INTERVALS.length);
@@ -1303,24 +1314,20 @@ document.addEventListener('click', e => {
     case 'p-next': playerStep(1); break;
     case 'p-repeat': S.repeat = !S.repeat; save(); updatePlayerUI(); toast(S.repeat ? 'تكرار الآية مُفعّل 🔁 — مناسب للحفظ' : 'أُوقف التكرار'); break;
     case 'p-speed': S.speed = parseFloat(t.dataset.v); save(); AU.playbackRate = S.speed; updatePlayerUI(); break;
-    case 'p-close': {
+    case 'p-close':
       AU.pause(); P.on = false; document.body.classList.remove('player-on'); setPlayerSize();
       document.querySelectorAll('.playing').forEach(x => x.classList.remove('playing'));
       break;
-    }
     case 'undo': if (undoFn) { const f = undoFn; undoFn = null; el('toasts').innerHTML = ''; f(); } break;
   }
 });
+let searchDeb = null;
 document.addEventListener('input', e => {
   const id = e.target.id;
   if (id === 'pSeek') { if (AU.duration) AU.currentTime = (parseNum(e.target.value) / 1000) * AU.duration; }
   if (id === 'searchInput') { searchQ = e.target.value; clearTimeout(searchDeb); searchDeb = setTimeout(renderSearch, 220); }
-  if (id === 'surahFilter') {
-    const q = norm(e.target.value);
-    el('idxList').innerHTML = surahRows(META.filter(m => !q || norm(m.name).includes(q)));
-  }
+  if (id === 'surahFilter') { const q = norm(e.target.value); el('idxList').innerHTML = surahRows(META.filter(m => !q || norm(m.name).includes(q))); }
 });
-let searchDeb = null;
 document.addEventListener('change', e => {
   if (e.target.id === 'readJump') go('#/read/' + (parseNum(e.target.value) || 1));
   if (e.target.id === 'hfS') {
@@ -1353,22 +1360,18 @@ document.addEventListener('keydown', e => {
   if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
   if (e.key === ' ' && P.on) { e.preventDefault(); AU.paused ? AU.play().catch(() => {}) : AU.pause(); }
   if (e.key === 'Escape') closeAyahBar();
-  if (P.on && P.mode === 'ayah') {
-    if (e.key === 'ArrowLeft') playerStep(1);
-    if (e.key === 'ArrowRight') playerStep(-1);
-  }
+  if (P.on && P.mode === 'ayah') { if (e.key === 'ArrowLeft') playerStep(1); if (e.key === 'ArrowRight') playerStep(-1); }
   if (ROUTE.name === 'read') {
     if (e.key === '+') { S.font = clamp(S.font + 2, 20, 46); save(); applyFont(); }
     if (e.key === '-') { S.font = clamp(S.font - 2, 20, 46); save(); applyFont(); }
   }
 });
 
-/* ---------- المظهر والاتصال والتثبيت ---------- */
+/* ---------- المظهر والاتصال ---------- */
 function applyTheme() {
   document.documentElement.dataset.theme = S.theme;
   el('themeBtn').textContent = S.theme === 'day' ? '🌙' : '☀️';
-  const tc = S.theme === 'day' ? '#0d3f2e' : '#071b14';
-  document.querySelector('meta[name="theme-color"]').setAttribute('content', tc);
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', S.theme === 'day' ? '#0d3f2e' : '#071b14');
 }
 function applyFont() { document.documentElement.style.setProperty('--qsize', S.font + 'px'); }
 function netUI() {
@@ -1376,7 +1379,7 @@ function netUI() {
   el('netDot').classList.toggle('off', !on);
   el('netDot').title = on ? 'متصل بالإنترنت' : 'دون اتصال — المحتوى المحمّل متاح';
 }
-window.addEventListener('online', () => { netUI(); toast('عاد الاتصال ✦'); if (ROUTE.name === 'audio' && (!MP3_REC || !MP3_REC.length)) { MP3_REC = null; ensureReciters(); } });
+window.addEventListener('online', () => { netUI(); toast('عاد الاتصال ✦'); ensureFull().then(ok => { if (ok && ROUTE.name === 'read') fillReader(0); }); if (ROUTE.name === 'audio') { MP3_REC = null; ensureReciters(); } });
 window.addEventListener('offline', () => { netUI(); toast('وضع دون اتصال — كل ما قرأته أو استمعت إليه محفوظ'); });
 let deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; el('installBtn').style.display = 'inline-flex'; });
@@ -1388,10 +1391,21 @@ applyTheme(); applyFont(); netUI();
 if (!location.hash) location.hash = '#/home';
 render();
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        try { if (!sessionStorage.getItem('nw-reloaded')) { sessionStorage.setItem('nw-reloaded', '1'); location.reload(); } } catch (_) {}
+      });
+    }).catch(() => {});
+  });
 }
-/* تهيئة هادئة بالخلفية: نص ورش الكامل + قائمة قرّاء ورش */
-setTimeout(() => { ensureFull().catch(() => {}); ensureReciters().catch(() => {}); }, 2500);
+ensureFull().then(ok => {
+  if (!ok) return;
+  if (ROUTE.name === 'read') fillReader(0);
+  if (ROUTE.name === 'home') { const h = el('view'); if (h) { render(); } }
+  if (ROUTE.name === 'search') renderSearch();
+});
+setTimeout(() => { ensureReciters().catch(() => {}); }, 1800);
 </script>
 </body>
 </html>
