@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="32%" cy="22%" r="95%">
+      <stop offset="0" stop-color="#1d6247"/><stop offset=".55" stop-color="#0d3f2e"/><stop offset="1" stop-color="#051f16"/>
+    </radialGradient>
+    <linearGradient id="cover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f8060"/><stop offset=".45" stop-color="#155a41"/><stop offset="1" stop-color="#0a2f22"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8e5b0"/><stop offset=".45" stop-color="#d9b45c"/><stop offset="1" stop-color="#967026"/>
+    </linearGradient>
+    <linearGradient id="spine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123f2f"/><stop offset="1" stop-color="#04170f"/>
+    </linearGradient>
+    <linearGradient id="pages" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fdf6e3"/><stop offset=".6" stop-color="#ecdcb6"/><stop offset="1" stop-color="#cdb684"/>
+    </linearGradient>
+    <linearGradient id="pagesB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4e8c8"/><stop offset="1" stop-color="#c3a877"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="10"/></filter>
+    <pattern id="zel" width="64" height="64" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#d9b45c" stroke-width="1" opacity=".07">
+        <rect x="20" y="20" width="24" height="24"/>
+        <rect x="20" y="20" width="24" height="24" transform="rotate(45 32 32)"/>
+      </g>
+    </pattern>
+    <g id="cstar">
+      <rect x="-7" y="-7" width="14" height="14" fill="url(#gold)"/>
+      <rect x="-7" y="-7" width="14" height="14" fill="url(#gold)" transform="rotate(45)"/>
+    </g>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="112" fill="url(#zel)"/>
+  <rect x="30" y="30" width="452" height="452" rx="88" fill="none" stroke="url(#gold)" stroke-width="10"/>
+  <rect x="52" y="52" width="408" height="408" rx="70" fill="none" stroke="#d9b45c" stroke-width="2" opacity=".45"/>
+  <ellipse cx="258" cy="428" rx="168" ry="22" fill="#000" opacity=".45" filter="url(#blur)"/>
+
+  <!-- الغلاف الخلفي -->
+  <path d="M132,388 L376,406 L376,414 Q376,421 368,420 L140,403 Q132,402 132,395 Z" fill="#07271c"/>
+  <!-- كتلة الصفحات: الحافة اليسرى -->
+  <path d="M146,150 L133,158 L133,386 L146,381 Z" fill="url(#pages)"/>
+  <g stroke="#bfa26e" stroke-width="1.2" opacity=".85">
+    <path d="M136,163 L136,383"/><path d="M139,161 L139,382"/><path d="M142,159 L142,381"/>
+  </g>
+  <!-- كتلة الصفحات: الحافة السفلية -->
+  <path d="M146,381 L384,399 L375,412 L137,394 Z" fill="url(#pagesB)"/>
+  <g stroke="#b39660" stroke-width="1" opacity=".8">
+    <path d="M143,386 L380,404"/><path d="M140,390 L377,408"/>
+  </g>
+  <!-- الكعب (يمين المصحف) -->
+  <path d="M384,150 L401,158 L401,404 L384,399 Z" fill="url(#spine)"/>
+  <g stroke="url(#gold)" stroke-width="3.4">
+    <path d="M386,192 L399,198"/><path d="M386,272 L399,278"/><path d="M386,352 L399,358"/>
+  </g>
+  <!-- الغلاف الأمامي -->
+  <path d="M160,133 L370,149 Q384,150 384,164 L384,386 Q384,400 370,399 L160,383 Q146,382 146,368 L146,147 Q146,132 160,133 Z"
+        fill="url(#cover)" stroke="#04150f" stroke-width="2"/>
+  <!-- إطار التجليد الذهبي -->
+  <path d="M172,159 L358,173 Q366,174 366,182 L366,370 Q366,378 358,377 L172,363 Q164,362 164,354 L164,167 Q164,158 172,159 Z"
+        fill="none" stroke="url(#gold)" stroke-width="4"/>
+  <path d="M178,166 L352,179 Q358,180 358,186 L358,363 Q358,369 352,368 L178,355 Q172,354 172,348 L172,173 Q172,165 178,166 Z"
+        fill="none" stroke="#d9b45c" stroke-width="1.4" opacity=".55"/>
+  <use href="#cstar" x="180" y="176"/><use href="#cstar" x="350" y="188"/>
+  <use href="#cstar" x="180" y="348"/><use href="#cstar" x="350" y="360"/>
+
+  <!-- الميدالية: نجمة ثمانية -->
+  <polygon fill="url(#gold)" stroke="#7a5a1c" stroke-width="2" points="341,252 317,273 319,306 286,304 265,328 244,304 211,306 213,273 189,252 213,231 211,198 244,200 265,176 286,200 319,198 317,231"/>
+  <circle cx="265" cy="252" r="54" fill="#0d3f2e" stroke="#f0cf8a" stroke-width="3"/>
+  <circle cx="265" cy="252" r="47" fill="none" stroke="#d9b45c" stroke-width="1.2" opacity=".5"/>
+  <!-- الهلال والنجمة — الجزائر -->
+  <path d="M280,230 A30 30 0 1 0 280,274 A24 24 0 1 1 280,230 Z" fill="#d21034" stroke="#f7efdd" stroke-width="1.6"/>
+  <polygon fill="#d21034" stroke="#f7efdd" stroke-width="1.2" points="294,252 286.6,254.6 286.4,262.5 281.6,256.3 274.1,258.5 278.5,252 274.1,245.5 281.6,247.7 286.4,241.5 286.6,249.4"/>
+
+  <text x="265" y="364" text-anchor="middle" font-family="Amiri,'Scheherazade New','Traditional Arabic','Noto Naskh Arabic',serif" font-size="40" font-weight="700" fill="url(#gold)" stroke="#04150f" stroke-width=".7">ورش</text>
+  <path d="M162,140 Q262,120 372,152 L372,166 Q262,136 162,155 Z" fill="#fff" opacity=".07"/>
+  <ellipse cx="200" cy="118" rx="150" ry="52" fill="#f0cf8a" opacity=".07"/>
+</svg>

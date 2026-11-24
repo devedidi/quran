@@ -1,0 +1,19 @@
+{
+  "name": "نُور المُصحف — ورش عن نافع",
+  "short_name": "نُور المُصحف",
+  "description": "مصحف إلكتروني برواية ورش عن نافع: قراءة، تلاوات، بحث، حفظ ومراجعة.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "theme_color": "#0d3f2e",
+  "background_color": "#efe4c8",
+  "categories": ["books", "education"],
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
