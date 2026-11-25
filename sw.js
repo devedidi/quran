@@ -1,4 +1,4 @@
-/* نُور المُصحف — ورش عن نافع | Service Worker v6
+/* نُور المُصحف — ورش عن نافع | Service Worker v7
    يحذف تلقائيًا كل ذاكرات النسخ القديمة (حفص) عند التفعيل. */
 const VER = 'v7';
 const SHELL = `noor-warsh-shell-${VER}`;
