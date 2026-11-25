@@ -573,14 +573,25 @@ function deriveWarshJuz(data) {
   return true;
 }
 
+async function ensureWarshFont() {
+  // يجب انتظار خط ورش في كل تشغيل، حتى عند استعادة النص المحفوظ محليًا.
+  // استعادة النص قبل جاهزية الخط كانت تجعل الهاتف يعرضه بخط بديل بعد إعادة التحميل.
+  try {
+    await document.fonts.load('16px "KFGQPC Warsh"');
+    return document.fonts.check('16px "KFGQPC Warsh"');
+  } catch (_) {
+    return false;
+  }
+}
+
 async function getWarshFromIndependentEdition() {
   const data = await jget(W_TEXT_GITHUB, 30000);
   if (!data || data.format !== 'quran-mushaf' || !data.mushaf || data.mushaf.key !== 'warsh' ||
       data.counting?.system !== 'madani-last' || Number(data.counting?.ayah_count) !== W_TEXT_TOTAL ||
       !Array.isArray(data.words) || !Array.isArray(data.ayah_starts) || !Array.isArray(data.surahs) || data.surahs.length !== 114) return null;
   if (data.ayah_starts.length !== W_TEXT_TOTAL || data.surahs.some((s,i) => Number(s.number) !== i+1 || !Number.isInteger(Number(s.first_ayah)) || !Number.isInteger(Number(s.ayah_count)))) return null;
-  // خط ورش الخاص مطلوب؛ لا نعرض حروفًا ناقصة بصمت إذا تعذر تحميله.
-  try { const loaded = await document.fonts.load('16px "KFGQPC Warsh"'); if (!loaded.length || !document.fonts.check('16px "KFGQPC Warsh"')) return null; } catch (_) { return null; }
+  // الخط تم التحقق من جاهزيته قبل الوصول إلى مصدر النص.
+  if (!document.fonts.check('16px "KFGQPC Warsh"')) return null;
   const marksByWord = new Map();
   if (Array.isArray(data.marks) && Array.isArray(data.mark_types)) {
     for (const mark of data.marks) {
@@ -672,6 +683,9 @@ function ensureFull() {
   if (FULL && DATA_READY) return Promise.resolve(true);
   if (fullPromise) return fullPromise;
   fullPromise = (async () => {
+    // لا نستعد النص المحفوظ ولا نعرض الآيات قبل التأكد من جاهزية خط ورش.
+    // هذا الفحص يجب أن يحدث في كل فتح/إعادة تحميل، وليس عند جلب النص لأول مرة فقط.
+    if (!(await ensureWarshFont())) return false;
     if (await restoreFull()) return true;
     // المصدر الأول: طبعة ورش الموثقة من KFGQPC عبر Quran.ws.
     const independent = await getWarshFromIndependentEdition();
