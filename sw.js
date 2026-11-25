@@ -1,6 +1,6 @@
-/* نُور المُصحف — ورش عن نافع | Service Worker v8
+/* نُور المُصحف — ورش عن نافع | Service Worker v9
    يحذف تلقائيًا كل ذاكرات النسخ القديمة (حفص) عند التفعيل. */
-const VER = 'v8';
+const VER = 'v9';
 const SHELL = `noor-warsh-shell-${VER}`;
 const DATA  = `noor-warsh-data-${VER}`;
 const MEDIA = `noor-warsh-media-${VER}`;
@@ -40,7 +40,7 @@ self.addEventListener('fetch', e => {
   if (isAudioHost(url.hostname)) return;
 
   /* الخطوط فقط: يمكن تخزينها مؤقتًا دون التأثير على بث الصوت. */
-  if (isMediaHost(url.hostname)) {
+  if (isMediaHost(url.hostname) || (url.hostname === 'raw.githubusercontent.com' && /\.ttf$/i.test(url.pathname))) {
     e.respondWith((async () => {
       const cache = await caches.open(MEDIA);
       const hit = await cache.match(req);
