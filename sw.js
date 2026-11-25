@@ -1,6 +1,6 @@
 /* نُور المُصحف — ورش عن نافع | Service Worker v6
    يحذف تلقائيًا كل ذاكرات النسخ القديمة (حفص) عند التفعيل. */
-const VER = 'v6';
+const VER = 'v7';
 const SHELL = `noor-warsh-shell-${VER}`;
 const DATA  = `noor-warsh-data-${VER}`;
 const MEDIA = `noor-warsh-media-${VER}`;
@@ -8,7 +8,7 @@ const KEEP  = [SHELL, DATA, MEDIA, 'noor-warsh-full-v3'];
 const SHELL_ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
 
 const DATA_HOSTS  = ['quran-json.risanb.com', 'quran-json.risan.workers.dev', 'api.alquran.cloud', 'cdn.jsdelivr.net', 'raw.githubusercontent.com'];
-const MEDIA_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+const MEDIA_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com', 'fonts.quran.ws'];
 const isMediaHost = h => MEDIA_HOSTS.includes(h);
 const isAudioHost = h => /^server\d+\.mp3quran\.net$/.test(h);
 const isDataHost  = h => DATA_HOSTS.includes(h) || h === 'mp3quran.net' || h === 'www.mp3quran.net';
